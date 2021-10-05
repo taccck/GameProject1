@@ -23,6 +23,7 @@ public class PlayerMovmentController : MonoBehaviour
     private void OnJump()
     {
         if (OnGround()) body.AddForce(Vector2.up * jumpForce);
+        GetComponent<PlayerInventory>().Drop();
     }
 
     private void Walk() => body.velocity = new Vector2((Vector2.right * walkDirection * walkSpeed).x, body.velocity.y);
