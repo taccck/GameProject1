@@ -65,6 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e321220fb3f01428d21a6b55e8af22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 7378782623200217319, guid: cd073a6d4ca56a44e8bd8ce6db87e5a6, type: 3}
+  dropSpeed: 7.5
 --- !u!114 &4536712816542843350
 MonoBehaviour:
   m_ObjectHideFlags: 0
