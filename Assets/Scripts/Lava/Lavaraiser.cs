@@ -15,7 +15,7 @@ namespace FG
         {
             if(transform.position.y < heightcap)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, speed*Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             }
         }
 

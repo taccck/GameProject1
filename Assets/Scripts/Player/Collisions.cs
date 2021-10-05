@@ -14,6 +14,7 @@ namespace FG
             }
             else if (collision.CompareTag("Spike"))
             {
+                float damage = collision.GetComponent<Spike>().Getdamage();
                 Debug.Log("Ouch");
             }
         }
