@@ -14,9 +14,8 @@ namespace FG
             {
                 Debug.Log("You ded");
             }
-            else if (collision.CompareTag("Spike"))
+            else if (collision.CompareTag("Danger"))
             {
-                float damage = collision.GetComponent<Spike>().Getdamage();
                 inventory.Drop();
             }
         }
