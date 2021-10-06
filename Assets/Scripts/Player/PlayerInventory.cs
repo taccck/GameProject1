@@ -38,6 +38,8 @@ public class PlayerInventory : MonoBehaviour
 
     private void Drop(int index)
     {
+        if (inventory[index] == null) return;
+        
         GameObject dropItem = Instantiate(itemPrefab);
         dropItem.transform.position = (Vector2) transform.position + new Vector2(0f, 2f);
         dropItem.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1f, 1f), 1f).normalized * dropSpeed;
