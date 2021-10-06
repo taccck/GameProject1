@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
 
     [NonSerialized] private readonly Item[] inventory = new Item[5];
 
-    public void Add(Item itemToAdd)
+    public bool Add(Item itemToAdd)
     {
         for (int i = 0; i < 5; i++)
         {
@@ -18,8 +18,11 @@ public class PlayerInventory : MonoBehaviour
 
             inventory[i] = itemToAdd;
             UpdateUI();
-            break;
+            print(Recipes.current.GetRecipe(inventory).name);
+            return true;
         }
+
+        return false;
     }
 
     public void Drop()
@@ -29,17 +32,17 @@ public class PlayerInventory : MonoBehaviour
         {
             if (inventory[randIndex] != null) break;
             randIndex = Random.Range(0, inventory.Length - 1);
-            
+
             if (i == 99) return;
         }
-        
+
         Drop(randIndex);
     }
 
     private void Drop(int index)
     {
         if (inventory[index] == null) return;
-        
+
         GameObject dropItem = Instantiate(itemPrefab);
         dropItem.transform.position = (Vector2) transform.position + new Vector2(0f, 2f);
         dropItem.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1f, 1f), 1f).normalized * dropSpeed;
@@ -47,7 +50,7 @@ public class PlayerInventory : MonoBehaviour
         itemBehavior.item = inventory[index];
         itemBehavior.SetItemValues();
         inventory[index] = null;
-        
+
         UpdateUI();
     }
 
@@ -68,18 +71,22 @@ public class PlayerInventory : MonoBehaviour
     {
         Drop(0);
     }
+
     private void OnDrop2()
     {
         Drop(1);
     }
+
     private void OnDrop3()
     {
         Drop(2);
     }
+
     private void OnDrop4()
     {
         Drop(3);
     }
+
     private void OnDrop5()
     {
         Drop(4);

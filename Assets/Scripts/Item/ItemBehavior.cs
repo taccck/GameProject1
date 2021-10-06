@@ -53,15 +53,15 @@ public class ItemBehavior : MonoBehaviour
         //player pickup
         if (other.transform.CompareTag("Player"))
         {
-            other.GetComponent<PlayerInventory>().Add(item);
-            Destroy(gameObject);
+            if (other.GetComponent<PlayerInventory>().Add(item))
+                Destroy(gameObject);
         }
     }
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        
+
         if (waitOnstart)
             StartCoroutine(WaitOnStart());
 
