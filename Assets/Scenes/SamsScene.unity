@@ -276,7 +276,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1340264409
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2640,10 +2640,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -5.9957995, y: 3.0280733}
+  - {x: -6.0485935, y: 8.1491375}
   - {x: -5.993475, y: -1.0085378}
   - {x: 2.0015326, y: -1.0060443}
-  - {x: 2.0001488, y: 2.032608}
+  - {x: 2.0001488, y: 10.321341}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -2839,7 +2839,7 @@ PrefabInstance:
     - target: {fileID: 7378782623200217312, guid: cd073a6d4ca56a44e8bd8ce6db87e5a6, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
+      objectReference: {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
     - target: {fileID: 7378782623200217312, guid: cd073a6d4ca56a44e8bd8ce6db87e5a6, type: 3}
       propertyPath: waitOnstart
       value: 1
@@ -3130,5 +3130,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4536712817465047240, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 106dc491184c6ec4986bbe23e13315a0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abd28612f1ee43c439673f251b2487ff, type: 3}

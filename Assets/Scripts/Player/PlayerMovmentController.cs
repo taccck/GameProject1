@@ -1,15 +1,24 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovmentController : MonoBehaviour
 {
-    [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float jumpForce = 500f;
+    [NonSerialized] public bool Walking;
+    [NonSerialized] public bool Jumping;
+    
+    [SerializeField, Tooltip("Meters / second"), Header("Walking")]
+    private float walkSpeed = 5f;
+    [SerializeField, Tooltip("Seconds"), Header("Jumping")]
+    private float maxJumpTime = .5f;
+    [SerializeField, Tooltip("Meters / second")]
+    private float jumpSpeed = 7f;
     [SerializeField] private LayerMask floorMaks;
 
     private Rigidbody2D body;
     private CapsuleCollider2D playerCollider;
     private int walkDirection = 0;
+    private float currJumpTime = 0;
     
     private const float SMALL_OFFSET = .1f;
 
@@ -20,13 +29,19 @@ public class PlayerMovmentController : MonoBehaviour
             transform.localScale = new Vector3(walkDirection * -1, 1, 1);
     }
 
-    private void OnJump()
+    private void OnJump(InputValue value)
     {
-        if (OnGround()) body.AddForce(Vector2.up * jumpForce);
-        GetComponent<PlayerInventory>().Drop();
+        Jumping = value.isPressed && OnGround();
+        
+        /*if (value.isPressed && OnGround())
+        {
+            Jumping = true;
+            return;
+        }
+
+        Jumping = false;*/
     }
 
-    private void Walk() => body.velocity = new Vector2((Vector2.right * walkDirection * walkSpeed).x, body.velocity.y);
 
     private bool OnGround() => Physics2D.BoxCast((Vector2) transform.position + playerCollider.offset,
         playerCollider.size - new Vector2(SMALL_OFFSET, 0), 0, Vector2.down,
@@ -35,6 +50,24 @@ public class PlayerMovmentController : MonoBehaviour
     private void FixedUpdate()
     {
         Walk();
+        Jump();
+    }
+    
+    private void Walk() => body.velocity = new Vector2((Vector2.right * walkDirection * walkSpeed).x, body.velocity.y);
+    
+    private void Jump()
+    {
+        body.gravityScale = 1;
+        currJumpTime += Time.deltaTime;
+        if (!Jumping || currJumpTime >= maxJumpTime)
+        {
+            currJumpTime = 0;
+            Jumping = false;
+            return;
+        }
+
+        body.gravityScale = 0;
+        body.velocity = new Vector2(body.velocity.x, jumpSpeed);
     }
 
     private void Awake()

@@ -49,6 +49,7 @@ public class ItemBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        body.velocity = Vector2.zero;
         //player pickup
         if (other.transform.CompareTag("Player"))
         {
