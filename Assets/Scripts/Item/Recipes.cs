@@ -54,12 +54,10 @@ public class Recipes : MonoBehaviour
         List<Recipe> tempRecipes = new List<Recipe>(recipes);
         int filled = 0;
 
-        AddRecipesWithLengthOf(5);
-        AddRecipesWithLengthOf(4);
-        AddRecipesWithLengthOf(3);
-        AddRecipesWithLengthOf(2);
-        AddRecipesWithLengthOf(1);
-        AddRecipesWithLengthOf(0);
+        for (int i = 5; i >= 0; i--)
+        {
+            AddRecipesWithLengthOf(i);
+        }
 
         void AddRecipesWithLengthOf(int length)
         {
