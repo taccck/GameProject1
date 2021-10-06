@@ -20,6 +20,46 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "Drop1",
+                    "type": "Button",
+                    "id": "5747f379-a655-4822-b040-df41f4082356",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Drop2",
+                    "type": "Button",
+                    "id": "9a609afd-e752-4c37-bf4e-ac912dbc5984",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Drop3",
+                    "type": "Button",
+                    "id": "c75dca1f-232e-449d-9b12-345d142ab47d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Drop4",
+                    "type": "Button",
+                    "id": "7ef07ac1-79c3-4ad7-8dc2-9639c4edf6ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Drop5",
+                    "type": "Button",
+                    "id": "3fbd0069-37c5-43a3-b5c2-3b5b8b19908a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -64,6 +104,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ed0d97a-58ba-456b-ad3c-e3ee0fb506e7",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c99b113-b97f-49be-bdfa-5ccde31d3c21",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1504e98-6ea8-4d74-85c8-85663ad65492",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "010425c0-2a01-44f7-8960-88a02b099bd6",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95bfdd0a-357c-4c3a-bf56-e7a216d7c09a",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
