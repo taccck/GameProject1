@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Fallthrough",
+                    "type": "Button",
+                    "id": "e8bd6a1c-6239-463a-b2b8-4a30e95cb990",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -159,6 +167,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Drop5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6bba88d9-16f4-43eb-bbfe-d3b805460c24",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fallthrough",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
