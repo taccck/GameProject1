@@ -5,12 +5,14 @@ using Random = UnityEngine.Random;
 public class ItemBehavior : MonoBehaviour
 {
     public Item item;
+    public bool waitOnstart = true;
 
     [SerializeField] private LayerMask floorMask;
     [SerializeField] private float stopDistance = .75f;
-    [SerializeField] private bool waitOnstart = false;
+    [SerializeField] private ParticleSystem particleSystem;
 
     private Rigidbody2D body;
+    private SpriteRenderer spriteRenderer;
 
     private void Update()
     {
@@ -54,25 +56,39 @@ public class ItemBehavior : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             if (other.GetComponent<PlayerInventory>().Add(item))
-                Destroy(gameObject);
+                StartCoroutine(Pickup());
         }
+    }
+
+    IEnumerator Pickup()
+    {
+        particleSystem.Play();
+        spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
+        Destroy(GetComponent<BoxCollider2D>());
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        if (waitOnstart)
+            StartCoroutine(WaitOnStart());
+
+        SetItemValues();
+        particleSystem.GetComponent<Renderer>().sortingLayerName = "Foreground";
     }
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-
-        if (waitOnstart)
-            StartCoroutine(WaitOnStart());
-
-        SetItemValues();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SetItemValues()
     {
         if (item != null)
         {
-            GetComponent<SpriteRenderer>().sprite = item.sprite;
+            spriteRenderer.sprite = item.sprite;
             name = item.name;
         }
     }
