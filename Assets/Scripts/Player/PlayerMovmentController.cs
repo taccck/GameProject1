@@ -9,6 +9,7 @@ namespace FG
         [NonSerialized] private bool walking;
         [NonSerialized] private bool jumping;
         [NonSerialized] private bool bonking;
+        [NonSerialized] private bool dashing;
 
         [SerializeField, Tooltip("Meters / second"), Header("Walking")]
         private float walkSpeed = 5f;
@@ -18,6 +19,12 @@ namespace FG
 
         [SerializeField, Tooltip("Meters / second")]
         private float jumpSpeed = 7f;
+
+        [SerializeField, Tooltip("Newton"), Header("Dashing")]
+        private float dashForce = .5f;
+
+        [SerializeField, Tooltip("Meters / second"), Header("Knockback")]
+        private float knockbackSpeed = 1f;
 
         private LayerMask floorMaks;
         private Rigidbody2D body;
@@ -33,12 +40,22 @@ namespace FG
 
         [HideInInspector] private float rayrange = 2f;
 
+        public void Knockback(bool right, bool up)
+        {
+            bonking = true;
+            Vector2 knockbackDir = Vector2.zero;
+            knockbackDir.y = up ? 1f : -1f;
+            knockbackDir.x = right ? 1f : -1f;
+            knockbackDir.Normalize();
+            print(knockbackDir);
+
+            body.AddForce(knockbackDir * knockbackSpeed);
+        }
+
         private void OnMove(InputValue value)
         {
             walkDirection = (int) value.Get<float>();
             walking = walkDirection != 0;
-            if (walking && !bonking)
-                transform.localScale = new Vector3(walkDirection * -1, 1, 1);
         }
 
         private void OnJump(InputValue value) => jumping = value.isPressed && onGround;
@@ -56,6 +73,11 @@ namespace FG
 
         private void OnDash(InputValue value)
         {
+            if (!dashing && !onGround)
+            {
+                dashing = true;
+                body.AddForce(Vector2.right * transform.localScale.x * dashForce * -1f);
+            }
         }
 
         private void FixedUpdate()
@@ -63,6 +85,7 @@ namespace FG
             OnGround();
             Walk();
             Jump();
+            Dash();
             Animate();
         }
 
@@ -72,13 +95,21 @@ namespace FG
                 playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0, Vector2.down,
                 SMALL_OFFSET, floorMaks);
 
-            if (onGround) bonking = false;
+            if (onGround)
+            {
+                bonking = false;
+                dashing = false;
+            }
         }
 
         private void Walk()
         {
-            if (!bonking)
+            if (!bonking && !dashing)
+            {
                 body.velocity = new Vector2((Vector2.right * walkDirection * walkSpeed).x, body.velocity.y);
+                if (walking)
+                    transform.localScale = new Vector3(walkDirection * -1, 1, 1);
+            }
         }
 
         private void Jump()
@@ -99,7 +130,6 @@ namespace FG
             {
                 if (!roofCheck.transform.CompareTag("Platform"))
                 {
-                    bonking = true;
                     jumping = false;
                 }
             }
@@ -108,10 +138,28 @@ namespace FG
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
         }
 
+        private void Dash()
+        {
+            if (dashing)
+            {
+                RaycastHit2D sideCheck = Physics2D.BoxCast((Vector2) transform.position + playerCollider.offset,
+                    playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0,
+                    Vector2.right * transform.localScale.x * -1f,
+                    SMALL_OFFSET, floorMaks);
+                if (sideCheck)
+                {
+                    dashing = false;
+                    Knockback(Mathf.Approximately(transform.localScale.x, 1f), true);
+                }
+            }
+        }
+
         private void Animate()
         {
             if (bonking)
                 animController.ChangeAnimationState(animController.Bonk);
+            else if (dashing)
+                animController.ChangeAnimationState(animController.Dash);
             else if (jumping)
                 animController.ChangeAnimationState(animController.Jump);
             else if (onGround)
