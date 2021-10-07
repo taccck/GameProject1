@@ -47,6 +47,7 @@ public class PlayerInventory : MonoBehaviour
         dropItem.transform.position = (Vector2) transform.position + new Vector2(0f, 2f);
         dropItem.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1f, 1f), 1f).normalized * dropSpeed;
         ItemBehavior itemBehavior = dropItem.GetComponent<ItemBehavior>();
+        itemBehavior.waitOnstart = false;
         itemBehavior.item = inventory[index];
         itemBehavior.SetItemValues();
         inventory[index] = null;
