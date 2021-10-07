@@ -87,3 +87,31 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
     sprite: {fileID: 0}
+  - name: Beef Wellington
+    ingredients:
+    - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
+    - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
+    - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
+    - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
+    sprite: {fileID: 0}
+  - name: Chocolate Meat
+    ingredients:
+    - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
+    - {fileID: 11400000, guid: 86e40344f374f554ba68ed691527dbef, type: 2}
+    - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
+    sprite: {fileID: 0}
+  - name: Meat Pie
+    ingredients:
+    - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
+    - {fileID: 11400000, guid: 58bda2cd3e84a5c47b6f70d879ebde1a, type: 2}
+    - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
+    - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
+    - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
+    sprite: {fileID: 0}
+  - name: French Omlette
+    ingredients:
+    - {fileID: 11400000, guid: 58bda2cd3e84a5c47b6f70d879ebde1a, type: 2}
+    - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
+    - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
+    - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
+    sprite: {fileID: 0}
