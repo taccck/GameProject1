@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 4536712816542843351}
   - component: {fileID: 4536712816542843336}
   - component: {fileID: -9012329498697741050}
-  - component: {fileID: 4980911346096398464}
+  - component: {fileID: 2829259771513367442}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -487,10 +487,7 @@ MonoBehaviour:
   walkSpeed: 5
   maxJumpTime: 0.5
   jumpSpeed: 7
-  floorMaks:
-    serializedVersion: 2
-    m_Bits: 64
-  platformpassing: {fileID: 4980911346096398464}
+  platformpassing: {fileID: 2829259771513367442}
 --- !u!114 &4536712816542843347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 4536712816542843347}
---- !u!114 &4980911346096398464
+--- !u!114 &2829259771513367442
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -600,11 +597,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4536712816542843337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
+  m_Script: {fileID: 11500000, guid: 43bf2631da348b740915a5ef7f1c57db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 4536712816542843336}
-  passwindow: 0.25
+  passwindow: 0.5
 --- !u!1 &4536712817465047241
 GameObject:
   m_ObjectHideFlags: 0

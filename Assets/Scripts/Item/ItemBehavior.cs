@@ -1,4 +1,5 @@
 using System.Collections;
+using FG;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,12 +8,13 @@ public class ItemBehavior : MonoBehaviour
     public Item item;
     public bool waitOnstart = true;
 
-    [SerializeField] private LayerMask floorMask;
     [SerializeField] private float stopDistance = .75f;
-    [SerializeField] private ParticleSystem particleSystem;
 
+    private LayerMask floorMask;
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
+    private ParticleSystem pickupParticles;
+    private ParticleSystem burnParticles;
 
     private void Update()
     {
@@ -55,14 +57,32 @@ public class ItemBehavior : MonoBehaviour
         //player pickup
         if (other.transform.CompareTag("Player"))
         {
-            if (other.GetComponent<PlayerInventory>().Add(item))
-                StartCoroutine(Pickup());
+            if (other.name != "Hatcollider")
+                if (other.GetComponent<PlayerInventory>().Add(item))
+                    StartCoroutine(Pickup());
+        }
+        else if (other.transform.CompareTag("Danger"))
+        {
+            Lavaraiser doIExist = other.GetComponent<Lavaraiser>();
+            if (doIExist != null)
+            {
+                StartCoroutine(Burn());
+            }
         }
     }
 
     IEnumerator Pickup()
     {
-        particleSystem.Play();
+        pickupParticles.Play();
+        spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
+        Destroy(GetComponent<BoxCollider2D>());
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
+    IEnumerator Burn()
+    {
+        burnParticles.Play();
         spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
         Destroy(GetComponent<BoxCollider2D>());
         yield return new WaitForSeconds(1f);
@@ -75,14 +95,9 @@ public class ItemBehavior : MonoBehaviour
             StartCoroutine(WaitOnStart());
 
         SetItemValues();
-        particleSystem.GetComponent<Renderer>().sortingLayerName = "Foreground";
+        floorMask = LayerMask.GetMask("Floor");
     }
 
-    private void Awake()
-    {
-        body = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     public void SetItemValues()
     {
@@ -100,5 +115,16 @@ public class ItemBehavior : MonoBehaviour
         yield return new WaitForSeconds(1f);
         body.gravityScale = 1f;
         waitOnstart = false;
+    }
+
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        pickupParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
+        burnParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
+
+        pickupParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
+        burnParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
     }
 }
