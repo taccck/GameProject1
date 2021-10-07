@@ -333,6 +333,8 @@ GameObject:
   - component: {fileID: 4536712816542843350}
   - component: {fileID: 4536712816542843351}
   - component: {fileID: 4536712816542843336}
+  - component: {fileID: -9012329498697741050}
+  - component: {fileID: 4980911346096398464}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -374,6 +376,7 @@ MonoBehaviour:
   floorMaks:
     serializedVersion: 2
     m_Bits: 64
+  ghost: {fileID: 0}
 --- !u!114 &4536712816542843347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +464,33 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.5}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &-9012329498697741050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536712816542843337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce888c9675ad3a04db3ab6990cea3d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 4536712816542843347}
+--- !u!114 &4980911346096398464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536712816542843337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 4536712816542843336}
+  passwindow: 0.5
 --- !u!1 &4536712817465047241
 GameObject:
   m_ObjectHideFlags: 0

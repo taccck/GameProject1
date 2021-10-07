@@ -718,11 +718,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   heightcap: 5
-  maxrange: 3
-  speedfactor: 1
+  maxrange: 5
+  speedfactor: 3
   multicatchup: 0
-  speedupdateinterval: 1
-  player: {fileID: 0}
+  speedupdateinterval: 0.5
+  player: {fileID: 1779992327}
 --- !u!212 &158537088
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -975,7 +975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779992327}
   collider: {fileID: 840700846}
   passwindow: 0.5
 --- !u!212 &840700844
@@ -1126,7 +1125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779992327}
   collider: {fileID: 863693525}
   passwindow: 0.5
 --- !u!212 &863693527
@@ -1251,7 +1249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779992327}
   collider: {fileID: 868841580}
   passwindow: 0.5
 --- !u!212 &868841582
@@ -1376,7 +1373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779992327}
   collider: {fileID: 913726289}
   passwindow: 0.5
 --- !u!212 &913726291
@@ -1501,7 +1497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779992327}
   collider: {fileID: 1191083758}
   passwindow: 0.5
 --- !u!212 &1191083760
@@ -1626,7 +1621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779992327}
   collider: {fileID: 1234448379}
   passwindow: 0.5
 --- !u!212 &1234448381
@@ -1740,7 +1734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779992327}
   collider: {fileID: 1655447715}
   passwindow: 0.5
 --- !u!19719996 &1655447715
@@ -2016,6 +2009,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1779992322 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4536712816542843336, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
+  m_PrefabInstance: {fileID: 1852686636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1779992327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4536712816542843349, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
@@ -2116,6 +2114,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4980911346096398464, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
+      propertyPath: collider
+      value: 
+      objectReference: {fileID: 1779992322}
     - target: {fileID: 5611264572812050141, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
