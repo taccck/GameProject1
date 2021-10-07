@@ -4,6 +4,7 @@ public class PlayerAnimationController : MonoBehaviour
 {
     public readonly int Idle = Animator.StringToHash("Idle");
     public readonly int Jump = Animator.StringToHash("Jump");
+    public readonly int Bonk = Animator.StringToHash("Bonk");
 
     private Animator animator;
     private int currState;

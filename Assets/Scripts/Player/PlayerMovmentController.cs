@@ -6,8 +6,9 @@ namespace FG
 {
     public class PlayerMovmentController : MonoBehaviour
     {
-        [NonSerialized] public bool Walking;
-        [NonSerialized] public bool Jumping;
+        [NonSerialized] private bool walking;
+        [NonSerialized] private bool jumping;
+        [NonSerialized] private bool bonking;
 
         [SerializeField, Tooltip("Meters / second"), Header("Walking")]
         private float walkSpeed = 5f;
@@ -24,6 +25,7 @@ namespace FG
         private PlayerAnimationController animController;
         private int walkDirection = 0;
         private float currJumpTime = 0;
+        private bool onGround;
 
         private const float SMALL_OFFSET = .1f;
 
@@ -34,46 +36,69 @@ namespace FG
         private void OnMove(InputValue value)
         {
             walkDirection = (int) value.Get<float>();
-            Walking = walkDirection != 0;
-            if (Walking)
+            walking = walkDirection != 0;
+            if (walking && !bonking)
                 transform.localScale = new Vector3(walkDirection * -1, 1, 1);
         }
 
-        private void OnJump(InputValue value) => Jumping = value.isPressed && OnGround();
-
-        private bool OnGround() => Physics2D.BoxCast((Vector2) transform.position + playerCollider.offset,
-            playerCollider.size - new Vector2(SMALL_OFFSET, 0), 0, Vector2.down,
-            SMALL_OFFSET, floorMaks);
+        private void OnJump(InputValue value) => jumping = value.isPressed && onGround;
 
         private void OnFallthrough(InputValue input)
         {
-            if (input.isPressed && OnGround())
+            if (input.isPressed && onGround)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -0.5f, 0f), -transform.up, rayrange);
                 if (hit.collider != null && hit.collider.CompareTag("Platform"))
                     platformpassing.Fall();
             }
         }
+        
+        private void OnDash(InputValue value)
+        {
+            
+        }
 
         private void FixedUpdate()
         {
+            OnGround();
             Walk();
             Jump();
             Animate();
         }
 
-        private void Walk() =>
-            body.velocity = new Vector2((Vector2.right * walkDirection * walkSpeed).x, body.velocity.y);
+        private void OnGround()
+        {
+            onGround = Physics2D.BoxCast((Vector2) transform.position + playerCollider.offset,
+                playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0, Vector2.down,
+                SMALL_OFFSET, floorMaks);
+
+            if (onGround) bonking = false;
+        }
+
+        private void Walk()
+        {
+            if (!bonking)
+                body.velocity = new Vector2((Vector2.right * walkDirection * walkSpeed).x, body.velocity.y);
+        }
 
         private void Jump()
         {
             body.gravityScale = 1;
             currJumpTime += Time.deltaTime;
-            if (!Jumping || currJumpTime >= maxJumpTime)
+            if (!jumping || currJumpTime >= maxJumpTime)
             {
                 currJumpTime = 0;
-                Jumping = false;
+                jumping = false;
                 return;
+            }
+
+            RaycastHit2D roofCheck = Physics2D.Raycast(
+                (Vector2) transform.position + new Vector2(0, playerCollider.size.y), Vector2.up,
+                SMALL_OFFSET, floorMaks);
+            if (roofCheck)
+            {
+                bonking = true;
+                jumping = false;
             }
 
             body.gravityScale = 0;
@@ -82,16 +107,18 @@ namespace FG
 
         private void Animate()
         {
-            if (Jumping)
+            if (bonking)
+                animController.ChangeAnimationState(animController.Bonk);
+            else if (jumping)
                 animController.ChangeAnimationState(animController.Jump);
-            else if (OnGround())
+            else if (onGround)
                 animController.ChangeAnimationState(animController.Idle);
         }
 
         private void Awake()
         {
             floorMaks = LayerMask.GetMask("Floor");
-            
+
             body = GetComponent<Rigidbody2D>();
             playerCollider = GetComponent<CapsuleCollider2D>();
             animController = GetComponentInChildren<PlayerAnimationController>();
