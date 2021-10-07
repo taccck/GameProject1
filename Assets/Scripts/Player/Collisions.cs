@@ -31,31 +31,5 @@ namespace FG
                     inventory.Drop();
                 }
         }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.collider.CompareTag("Platform"))
-            {
-                collider.enabled = false;
-                Debug.Log("enter");
-            }
-        }
-
-        private void OnCollisionExit2D(Collision2D collision)
-        {
-            if (collision.collider.CompareTag("Platform"))
-            {
-                collider.enabled = true;
-                Debug.Log("exit");
-            }
-        }
-
-        private void OnCollisionStay2D(Collision2D collision)
-        {
-            if (collision.collider.CompareTag("Platform"))
-            {
-                Debug.Log("stay");
-            }
-        }
     }
 }

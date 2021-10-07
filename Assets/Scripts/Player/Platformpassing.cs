@@ -5,7 +5,7 @@ namespace FG
 {
     public class Platformpassing : MonoBehaviour
     {
-        /*[SerializeField] private Collider2D collider;
+        [SerializeField] private Collider2D collider;
         [SerializeField] private float passwindow = 0.5f;
 
         [HideInInspector] private Coroutine passroutine;
@@ -20,6 +20,6 @@ namespace FG
         {
             collider.enabled = false;
             passroutine = StartCoroutine("Timer");
-        }*/
+        }
     }
 }
