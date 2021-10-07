@@ -200,6 +200,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4536712816542843337, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
   m_PrefabInstance: {fileID: 619388547}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &316971254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2829259771513367442, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
+  m_PrefabInstance: {fileID: 619388547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316971253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43bf2631da348b740915a5ef7f1c57db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &316971257 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4536712816542843347, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
@@ -271,6 +282,10 @@ PrefabInstance:
       propertyPath: maxJumpTime
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4536712816542843348, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
+      propertyPath: platformpassing
+      value: 
+      objectReference: {fileID: 316971254}
     - target: {fileID: 4536712816542843349, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -896,6 +911,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   heightcap: 25
+  maxrange: 10
+  speedfactor: 1
+  multicatchup: 0
+  speedupdateinterval: 1
+  player: {fileID: 0}
 --- !u!212 &1726416922
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2626,11 +2646,11 @@ GameObject:
   - component: {fileID: 1896148980}
   - component: {fileID: 1896148982}
   - component: {fileID: 1896148981}
-  - component: {fileID: 1896148984}
   - component: {fileID: 1896148983}
+  - component: {fileID: 1896148984}
   m_Layer: 6
   m_Name: Platforms
-  m_TagString: Floor
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2894,10 +2914,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1896148979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 346fe5856bb449a47bb0106e7bf35173, type: 3}
+  m_Script: {fileID: 11500000, guid: 43bf2631da348b740915a5ef7f1c57db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1730327121}
   collider: {fileID: 1896148983}
   passwindow: 0.5
 --- !u!1 &1966739478
