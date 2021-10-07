@@ -27,6 +27,8 @@ namespace FG
 
         private const float SMALL_OFFSET = .1f;
 
+        [SerializeField] private Platformpassing platformpassing;
+
         [HideInInspector] private float rayrange = 2f;
 
         private void OnMove(InputValue value)
@@ -47,10 +49,9 @@ namespace FG
         {
             if (input.isPressed && OnGround())
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -0.5f, 0f), -transform.up,
-                    rayrange);
-                if (hit.collider.CompareTag("Floor"))
-                    hit.collider.GetComponent<Platform>().Fall();
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -0.5f, 0f), -transform.up, rayrange);
+                if (hit.collider.CompareTag("Platform"))
+                    platformpassing.Fall();
             }
         }
 
