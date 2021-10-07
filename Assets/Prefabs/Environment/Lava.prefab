@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6055246342935608959}
   m_Layer: 6
   m_Name: Lava
-  m_TagString: Untagged
+  m_TagString: Danger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,10 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   heightcap: 5
-  maxrange: 5
-  speedfactor: 3
-  multicatchup: 0
-  speedupdateinterval: 0.5
+  maxrange: 10
+  speedfactor: 2
+  multicatchup: 1
+  speedupdateinterval: 1
   player: {fileID: 0}
 --- !u!61 &6055246342935608959
 BoxCollider2D:
