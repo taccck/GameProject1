@@ -9658,7 +9658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   waitOnstart: 1
-  stopDistance: 0.75
+  stopDistance: 0.25
 --- !u!212 &7378782623200217318
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9720,7 +9720,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

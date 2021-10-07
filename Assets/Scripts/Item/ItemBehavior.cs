@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using FG;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class ItemBehavior : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private ParticleSystem pickupParticles;
     private ParticleSystem burnParticles;
+    private BoxCollider2D collider;
+    private Vector2 colliderSize;
 
     private void Update()
     {
@@ -32,7 +35,16 @@ public class ItemBehavior : MonoBehaviour
 
     private bool FloorCheck() //todo can fall through the floor if it's moving faster than stopDistance
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, stopDistance, floorMask);
+        bool onFloor = Physics2D.Raycast((Vector2) transform.position - new Vector2(0f, colliderSize.y / 2f),
+            Vector2.down, stopDistance, floorMask);
+        if (onFloor)
+        {
+            body.velocity = Vector2.zero;
+            if (collider != null)
+                collider.isTrigger = true;
+        }
+
+        return onFloor;
     }
 
     float desync;
@@ -53,9 +65,8 @@ public class ItemBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        body.velocity = Vector2.zero;
         //player pickup
-        if (other.transform.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             if (other.name != "Hatcollider")
                 if (other.GetComponent<PlayerInventory>().Add(item))
@@ -64,6 +75,25 @@ public class ItemBehavior : MonoBehaviour
         else if (other.transform.CompareTag("Danger"))
         {
             Lavaraiser doIExist = other.GetComponent<Lavaraiser>();
+            if (doIExist != null)
+            {
+                StartCoroutine(Burn());
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        //player pickup
+        if (other.transform.CompareTag("Player"))
+        {
+            if (other.transform.name != "Hatcollider")
+                if (other.transform.GetComponent<PlayerInventory>().Add(item))
+                    StartCoroutine(Pickup());
+        }
+        else if (other.transform.CompareTag("Danger"))
+        {
+            Lavaraiser doIExist = other.transform.GetComponent<Lavaraiser>();
             if (doIExist != null)
             {
                 StartCoroutine(Burn());
@@ -123,6 +153,8 @@ public class ItemBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         pickupParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
         burnParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
+        collider = GetComponent<BoxCollider2D>();
+        colliderSize = collider.size;
 
         pickupParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
         burnParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
