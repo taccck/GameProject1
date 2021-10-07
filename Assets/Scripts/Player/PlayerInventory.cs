@@ -8,7 +8,11 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private float dropSpeed;
     [SerializeField] private ItemIcon[] icons;
 
-    [NonSerialized] private readonly Item[] inventory = new Item[5];
+    private LayerMask floorMask;
+
+    private readonly Item[] inventory = new Item[5];
+
+    private const float DROP_OFFSET = 1.5f;
 
     public bool Add(Item itemToAdd)
     {
@@ -43,8 +47,12 @@ public class PlayerInventory : MonoBehaviour
     {
         if (inventory[index] == null) return;
 
+
         GameObject dropItem = Instantiate(itemPrefab);
-        dropItem.transform.position = (Vector2) transform.position + new Vector2(0f, 2f);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, Vector2.up, DROP_OFFSET, floorMask);
+        float spawnDist = hit ? hit.distance : DROP_OFFSET;
+
+        dropItem.transform.position = (Vector2) transform.position + new Vector2(0f, spawnDist);
         dropItem.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1f, 1f), 1f).normalized * dropSpeed;
         ItemBehavior itemBehavior = dropItem.GetComponent<ItemBehavior>();
         itemBehavior.waitOnstart = false;
@@ -65,6 +73,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
+        floorMask = LayerMask.GetMask("Floor");
         UpdateUI();
     }
 

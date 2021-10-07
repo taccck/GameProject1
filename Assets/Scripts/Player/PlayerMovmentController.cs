@@ -18,8 +18,7 @@ namespace FG
         [SerializeField, Tooltip("Meters / second")]
         private float jumpSpeed = 7f;
 
-        [SerializeField] private LayerMask floorMaks;
-
+        private LayerMask floorMaks;
         private Rigidbody2D body;
         private CapsuleCollider2D playerCollider;
         private PlayerAnimationController animController;
@@ -90,6 +89,8 @@ namespace FG
 
         private void Awake()
         {
+            floorMaks = LayerMask.GetMask("Floor");
+            
             body = GetComponent<Rigidbody2D>();
             playerCollider = GetComponent<CapsuleCollider2D>();
             animController = GetComponentInChildren<PlayerAnimationController>();
