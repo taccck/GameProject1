@@ -57,16 +57,17 @@ public class ItemBehavior : MonoBehaviour
         //player pickup
         if (other.transform.CompareTag("Player"))
         {
-            if (other.GetComponent<PlayerInventory>().Add(item))
-                StartCoroutine(Pickup());
+            if (other.name != "Hatcollider")
+                if (other.GetComponent<PlayerInventory>().Add(item))
+                    StartCoroutine(Pickup());
         }
         else if (other.transform.CompareTag("Danger"))
         {
-           Lavaraiser doIExist = other.GetComponent<Lavaraiser>();
-           if (doIExist != null)
-           {
-               StartCoroutine(Burn());
-           }
+            Lavaraiser doIExist = other.GetComponent<Lavaraiser>();
+            if (doIExist != null)
+            {
+                StartCoroutine(Burn());
+            }
         }
     }
 
@@ -78,7 +79,7 @@ public class ItemBehavior : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
-    
+
     IEnumerator Burn()
     {
         burnParticles.Play();
@@ -96,7 +97,7 @@ public class ItemBehavior : MonoBehaviour
         SetItemValues();
         floorMask = LayerMask.GetMask("Floor");
     }
-    
+
 
     public void SetItemValues()
     {
@@ -122,7 +123,7 @@ public class ItemBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         pickupParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
         burnParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
-        
+
         pickupParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
         burnParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
     }
