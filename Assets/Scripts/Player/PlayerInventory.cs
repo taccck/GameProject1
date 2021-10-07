@@ -46,8 +46,7 @@ public class PlayerInventory : MonoBehaviour
     private void Drop(int index)
     {
         if (inventory[index] == null) return;
-
-
+        
         GameObject dropItem = Instantiate(itemPrefab);
         RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, Vector2.up, DROP_OFFSET, floorMask);
         float spawnDist = hit ? hit.distance : DROP_OFFSET;
