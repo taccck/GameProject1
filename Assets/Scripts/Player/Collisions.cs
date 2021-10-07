@@ -6,18 +6,30 @@ namespace FG
 {
     public class Collisions : MonoBehaviour
     {
+        [SerializeField] private Collider2D collider;
         [SerializeField] private PlayerInventory inventory;
+        [SerializeField] private float invultime = 1f;
+
+        [HideInInspector] private bool invul = false;
+        [HideInInspector] private Coroutine invulroutine;
+
+        private IEnumerator Invulperiod()
+        {
+            yield return new WaitForSeconds(invultime);
+            invul = false;
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.name == "Lava")
-            {
                 Debug.Log("You ded");
-            }
             else if (collision.CompareTag("Danger"))
-            {
-                inventory.Drop();
-            }
+                if (!invul)
+                {
+                    invul = true;
+                    invulroutine = StartCoroutine("Invulperiod");
+                    inventory.Drop();
+                }
         }
     }
 }

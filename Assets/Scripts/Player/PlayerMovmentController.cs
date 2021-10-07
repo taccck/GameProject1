@@ -47,9 +47,8 @@ namespace FG
         {
             if (input.isPressed && onGround)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -0.5f, 0f), -transform.up,
-                    rayrange);
-                if (hit.collider.CompareTag("Platform"))
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -0.5f, 0f), -transform.up, rayrange);
+                if (hit.collider != null && hit.collider.CompareTag("Platform"))
                     platformpassing.Fall();
             }
         }
