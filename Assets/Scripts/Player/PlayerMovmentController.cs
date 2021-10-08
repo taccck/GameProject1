@@ -49,7 +49,7 @@ namespace FG
             knockbackDir.x = right ? 1f : -1f;
             knockbackDir = knockbackDir.normalized * knockbackSpeed;
 
-            body.AddForce(knockbackDir);
+            body.AddForce(knockbackDir, ForceMode2D.Impulse);
         }
 
         private void OnMove(InputValue value)
@@ -63,10 +63,13 @@ namespace FG
         private void OnFallthrough(InputValue input)
         {
             if (!input.isPressed || !onGround) return;
-            
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, rayrange);
+
+            RaycastHit2D hit =
+                Physics2D.Raycast(transform.position, -transform.up, rayrange, floorMaks);
             if (hit.collider != null && hit.collider.CompareTag("Platform"))
+            {
                 platformpassing.Fall();
+            }
         }
 
         private bool Togglepause()
@@ -90,11 +93,11 @@ namespace FG
 
         private void OnDash(InputValue value)
         {
-            if (dashing || onGround) return;
+            if (dashing || onGround || bonking) return;
 
             jumping = false;
             dashing = true;
-            body.AddForce(Vector2.right * transform.localScale.x * dashForce * -1f);
+            body.AddForce(Vector2.right * transform.localScale.x * dashForce * -1f, ForceMode2D.Impulse);
         }
 
         private void FixedUpdate()
@@ -113,7 +116,7 @@ namespace FG
                 SMALL_OFFSET, floorMaks);
 
             if (!onGround) return;
-            
+
             bonking = false;
             dashing = false;
         }
@@ -161,7 +164,7 @@ namespace FG
                 playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0,
                 Vector2.right * transform.localScale.x * -1f,
                 SMALL_OFFSET, floorMaks);
-            
+
             if (!sideCheck) return;
             dashing = false;
             Knockback(Mathf.Approximately(transform.localScale.x, 1f), true);

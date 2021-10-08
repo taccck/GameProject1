@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using FG;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 public class ItemBehavior : MonoBehaviour
@@ -106,6 +107,7 @@ public class ItemBehavior : MonoBehaviour
         pickupParticles.Play();
         spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
         Destroy(GetComponent<BoxCollider2D>());
+        Destroy(GetComponent<ShadowCaster2D>());
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
@@ -115,6 +117,7 @@ public class ItemBehavior : MonoBehaviour
         burnParticles.Play();
         spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
         Destroy(GetComponent<BoxCollider2D>());
+        Destroy(GetComponent<ShadowCaster2D>());
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
@@ -156,7 +159,7 @@ public class ItemBehavior : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         colliderSize = collider.size;
 
-        pickupParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
-        burnParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
+        pickupParticles.GetComponent<Renderer>().sortingLayerName = "Particles";
+        burnParticles.GetComponent<Renderer>().sortingLayerName = "Particles";
     }
 }
