@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 4536712817465047240}
   - component: {fileID: 4395478050825426800}
   - component: {fileID: 7070231592867748569}
+  - component: {fileID: 365769671242790414}
   m_Layer: 0
   m_Name: protagSprite
   m_TagString: Untagged
@@ -606,6 +607,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e314b56af3eb0a24bbf35a4cf972ef49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &365769671242790414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536712817465047241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000e3b046b105795ab7772b0225
+  m_ShapePath:
+  - {x: -0.35311443, y: 0.21640706, z: 0}
+  - {x: -0.24276069, y: 0.26695272, z: 0}
+  - {x: -0.2860421, y: 0.015920535, z: 0}
+  - {x: 0.050742686, y: 0.0043389127, z: 0}
+  - {x: 0.20284794, y: 0.09692811, z: 0}
+  - {x: 0.35905015, y: 0.225649, z: 0}
+  - {x: 0.390625, y: 0.53402984, z: 0}
+  - {x: 0.019809142, y: 0.9161725, z: 0}
+  - {x: -0.17133257, y: 0.9120208, z: 0}
+  - {x: -0.3264421, y: 0.6882237, z: 0}
+  - {x: -0.30047148, y: 0.44007766, z: 0}
+  - {x: -0.3552946, y: 0.3188897, z: 0}
+  m_ShapePathHash: 1657226783
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -59032
 --- !u!1 &6874631842174636850
 GameObject:
   m_ObjectHideFlags: 0

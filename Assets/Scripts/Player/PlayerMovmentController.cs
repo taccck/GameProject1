@@ -90,7 +90,7 @@ namespace FG
 
         private void OnDash(InputValue value)
         {
-            if (dashing || onGround) return;
+            if (dashing || onGround || bonking) return;
 
             jumping = false;
             dashing = true;
