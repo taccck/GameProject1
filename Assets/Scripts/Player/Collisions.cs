@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FG
 {
@@ -22,7 +23,7 @@ namespace FG
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.name == "Lava")
-                Debug.Log("You ded");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             else if (collision.CompareTag("Danger"))
                 if (!invul)
                 {
