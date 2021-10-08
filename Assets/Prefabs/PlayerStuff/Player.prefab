@@ -373,8 +373,8 @@ MonoBehaviour:
   walkSpeed: 5
   maxJumpTime: 0.5
   jumpSpeed: 7
-  dashForce: 400
-  knockbackSpeed: 300
+  dashForce: 8
+  knockbackSpeed: 6
   platformpassing: {fileID: 2829259771513367442}
 --- !u!114 &4536712816542843347
 MonoBehaviour:
