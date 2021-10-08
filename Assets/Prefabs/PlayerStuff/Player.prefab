@@ -373,7 +373,7 @@ MonoBehaviour:
   walkSpeed: 5
   maxJumpTime: 0.5
   jumpSpeed: 7
-  dashForce: 500
+  dashForce: 400
   knockbackSpeed: 300
   platformpassing: {fileID: 2829259771513367442}
 --- !u!114 &4536712816542843347
@@ -491,7 +491,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 4536712816542843336}
-  passwindow: 0.25
 --- !u!1 &4536712817465047241
 GameObject:
   m_ObjectHideFlags: 0

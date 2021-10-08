@@ -9658,7 +9658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   waitOnstart: 1
-  stopDistance: 0.25
+  stopDistance: 0.4
 --- !u!212 &7378782623200217318
 SpriteRenderer:
   m_ObjectHideFlags: 0

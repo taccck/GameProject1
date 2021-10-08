@@ -47,8 +47,8 @@ public class ItemBehavior : MonoBehaviour
         return onFloor;
     }
 
-    float desync;
-    float startY;
+    private float desync;
+    private float startY;
 
     private void Bobble()
     {
