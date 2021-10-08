@@ -13,10 +13,12 @@ namespace FG
         [SerializeField] private bool multicatchup = false;
         [SerializeField] private float speedupdateinterval = 1f;
         [SerializeField] private Transform player;
+        [SerializeField] private float ylavastart = 5;
 
         [HideInInspector] private Vector3 target;
         [HideInInspector] private Coroutine updateroutine;
         [HideInInspector] private float speedamp;
+        [HideInInspector] private bool lavastarted = false;
 
         private IEnumerator Speedupdater()
         {
@@ -36,13 +38,19 @@ namespace FG
 
         private void FixedUpdate()
         {
+            if(player.transform.position.y >= ylavastart && !lavastarted)
+            {
+                target = new Vector3(0, heightcap, 0);
+                lavastarted = true;
+            }
+
             if(transform.position.y < heightcap)
                 transform.position = Vector3.MoveTowards(transform.position, target, speedamp * speed * Time.deltaTime);
         }
 
         private void Awake()
         {
-            target = new Vector3(0, heightcap, 0);
+            target = transform.position;
             updateroutine = StartCoroutine("Speedupdater");
         }
 
