@@ -13,6 +13,7 @@ namespace FG
         [SerializeField] private float invultime = 1f;
 
         private SpriteRenderer spriteRenderer;
+        private PlayerMovmentController movementController;
         [HideInInspector] private bool invul = false;
         [HideInInspector] private Coroutine invulroutine;
 
@@ -35,13 +36,14 @@ namespace FG
             spriteRenderer.color = Color.white;
         }
 
-        private void Collision()
+        private void Collision(Vector2 attackersPos)
         {
             if (!invul)
             {
                 invul = true;
                 invulroutine = StartCoroutine(InvulAnim());
                 inventory.Drop();
+                movementController.Knockback(transform.position.x > attackersPos.x, transform.position.y > attackersPos.y);
             }
         }
 
@@ -51,7 +53,7 @@ namespace FG
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             else if (collision.CompareTag("Danger"))
             {
-                Collision();
+                Collision(collision.transform.position);
             }
         }
 
@@ -59,13 +61,14 @@ namespace FG
         {
             if (collision.collider.CompareTag("Danger"))
             {
-                Collision();
+                Collision(collision.transform.position);
             }
         }
 
         private void Awake()
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            movementController = GetComponent<PlayerMovmentController>();
         }
     }
 }
