@@ -10,21 +10,21 @@ namespace FG
         [SerializeField] private float speed = 0f;
 
         [HideInInspector] private bool direction = false;
-        [HideInInspector] private Vector3 orgpos;
+        [HideInInspector] private Vector3 target;
 
         private void FixedUpdate()
         {
             if(!direction)
-                if (transform.position.x <= orgpos.x - patrolwidth)
-                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(orgpos.x - patrolwidth, 0, 0), speed * Time.deltaTime);
+                if (transform.position.x >= target.x - patrolwidth)
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x - patrolwidth, 0, 0), speed * Time.deltaTime);
             else
-                if (transform.position.x >= orgpos.x)
-                    transform.position = Vector3.MoveTowards(transform.position, orgpos, speed * Time.deltaTime);
+                if (transform.position.x <= target.x)
+                    transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
 
         private void Awake()
         {
-            orgpos = transform.position;
+            target = transform.position;
         }
     }
 }

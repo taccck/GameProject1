@@ -39,6 +39,7 @@ namespace FG
         [SerializeField] private Platformpassing platformpassing;
 
         [HideInInspector] private float rayrange = 2f;
+        [HideInInspector] private bool paused = false;
 
         public void Knockback(bool right, bool up)
         {
@@ -68,6 +69,25 @@ namespace FG
                 if (hit.collider != null && hit.collider.CompareTag("Platform"))
                     platformpassing.Fall();
             }
+        }
+
+        private bool Togglepause()
+        {
+            if (Time.timeScale == 0f)
+            {
+                Time.timeScale = 1f;
+                return (false);
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                return (true);
+            }
+        }
+
+        private void OnMenu(InputValue input)
+        {
+            paused = Togglepause();
         }
 
         private void OnDash(InputValue value)
@@ -172,6 +192,16 @@ namespace FG
             body = GetComponent<Rigidbody2D>();
             playerCollider = GetComponent<CapsuleCollider2D>();
             animController = GetComponentInChildren<PlayerAnimationController>();
+        }
+
+        void OnGUI()
+        {
+            if (paused)
+            {
+                GUILayout.Label("Game is paused! Hit ESC to unpause");
+                if (GUILayout.Button("Click me to quit"))
+                    Application.Quit();
+            }
         }
     }
 }
