@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FG
 {
-    public class Basicenemy : MonoBehaviour
+    public class Patrolingenemy : MonoBehaviour
     {
         [SerializeField] private int patrolwidth = 0;
         [SerializeField] private float speed = 0f;

@@ -9660,6 +9660,7 @@ MonoBehaviour:
   item: {fileID: 0}
   waitOnstart: 1
   stopDistance: 0.4
+  room: 0
 --- !u!212 &7378782623200217318
 SpriteRenderer:
   m_ObjectHideFlags: 0
