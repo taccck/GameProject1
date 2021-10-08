@@ -11,19 +11,19 @@ namespace FG
         [NonSerialized] private bool bonking;
         [NonSerialized] private bool dashing;
 
-        [SerializeField, Tooltip("Meters / second"), Header("Walking")]
+        [SerializeField, Tooltip("m/s"), Header("Walking")]
         private float walkSpeed = 5f;
 
         [SerializeField, Tooltip("Seconds"), Header("Jumping")]
         private float maxJumpTime = .5f;
 
-        [SerializeField, Tooltip("Meters / second")]
+        [SerializeField, Tooltip("m/s")]
         private float jumpSpeed = 7f;
 
-        [SerializeField, Tooltip("Newton"), Header("Dashing")]
+        [SerializeField, Tooltip("kg * m/s"), Header("Dashing")]
         private float dashForce = .5f;
 
-        [SerializeField, Tooltip("Meters / second"), Header("Knockback")]
+        [SerializeField, Tooltip("m/s"), Header("Knockback")]
         private float knockbackSpeed = 1f;
 
         private LayerMask floorMaks;
@@ -49,7 +49,7 @@ namespace FG
             knockbackDir.x = right ? 1f : -1f;
             knockbackDir = knockbackDir.normalized * knockbackSpeed;
 
-            body.AddForce(knockbackDir, ForceMode2D.Impulse);
+            body.velocity = knockbackDir;
         }
 
         private void OnMove(InputValue value)
