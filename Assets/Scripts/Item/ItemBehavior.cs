@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using FG;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 public class ItemBehavior : MonoBehaviour
@@ -15,6 +17,8 @@ public class ItemBehavior : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private ParticleSystem pickupParticles;
     private ParticleSystem burnParticles;
+    private BoxCollider2D collider;
+    private Vector2 colliderSize;
 
     private void Update()
     {
@@ -32,11 +36,20 @@ public class ItemBehavior : MonoBehaviour
 
     private bool FloorCheck() //todo can fall through the floor if it's moving faster than stopDistance
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, stopDistance, floorMask);
+        bool onFloor = Physics2D.Raycast((Vector2) transform.position - new Vector2(0f, colliderSize.y / 2f),
+            Vector2.down, stopDistance, floorMask);
+        if (onFloor)
+        {
+            body.velocity = Vector2.zero;
+            if (collider != null)
+                collider.isTrigger = true;
+        }
+
+        return onFloor;
     }
 
-    float desync;
-    float startY;
+    private float desync;
+    private float startY;
 
     private void Bobble()
     {
@@ -53,9 +66,8 @@ public class ItemBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        body.velocity = Vector2.zero;
         //player pickup
-        if (other.transform.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             if (other.name != "Hatcollider")
                 if (other.GetComponent<PlayerInventory>().Add(item))
@@ -71,11 +83,31 @@ public class ItemBehavior : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        //player pickup
+        if (other.transform.CompareTag("Player"))
+        {
+            if (other.transform.name != "Hatcollider")
+                if (other.transform.GetComponent<PlayerInventory>().Add(item))
+                    StartCoroutine(Pickup());
+        }
+        else if (other.transform.CompareTag("Danger"))
+        {
+            Lavaraiser doIExist = other.transform.GetComponent<Lavaraiser>();
+            if (doIExist != null)
+            {
+                StartCoroutine(Burn());
+            }
+        }
+    }
+
     IEnumerator Pickup()
     {
         pickupParticles.Play();
         spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
         Destroy(GetComponent<BoxCollider2D>());
+        Destroy(GetComponent<ShadowCaster2D>());
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
@@ -85,6 +117,7 @@ public class ItemBehavior : MonoBehaviour
         burnParticles.Play();
         spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
         Destroy(GetComponent<BoxCollider2D>());
+        Destroy(GetComponent<ShadowCaster2D>());
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
@@ -123,8 +156,10 @@ public class ItemBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         pickupParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
         burnParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
+        collider = GetComponent<BoxCollider2D>();
+        colliderSize = collider.size;
 
-        pickupParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
-        burnParticles.GetComponent<Renderer>().sortingLayerName = "Foreground";
+        pickupParticles.GetComponent<Renderer>().sortingLayerName = "Particles";
+        burnParticles.GetComponent<Renderer>().sortingLayerName = "Particles";
     }
 }

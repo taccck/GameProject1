@@ -48,7 +48,7 @@ MonoBehaviour:
     ingredients:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6de86a26d2a87ea48a11783577ec9fbd, type: 3}
   - name: Pancakes
     ingredients:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
@@ -86,7 +86,7 @@ MonoBehaviour:
     ingredients:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 7d3e8d8dba6b3f64ebef5ce428c4da44, type: 3}
   - name: Beef Wellington
     ingredients:
     - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
@@ -108,10 +108,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
     - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
     sprite: {fileID: 0}
-  - name: French Omlette
+  - name: Fancy Omlette
     ingredients:
     - {fileID: 11400000, guid: 58bda2cd3e84a5c47b6f70d879ebde1a, type: 2}
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6bc765d169367614294c03d50543ec32, type: 3}

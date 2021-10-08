@@ -30,8 +30,8 @@ namespace FG
         private Rigidbody2D body;
         private CapsuleCollider2D playerCollider;
         private PlayerAnimationController animController;
-        private int walkDirection = 0;
-        private float currJumpTime = 0;
+        private int walkDirection;
+        private float currJumpTime;
         private bool onGround;
 
         private const float SMALL_OFFSET = .1f;
@@ -39,6 +39,7 @@ namespace FG
         [SerializeField] private Platformpassing platformpassing;
 
         [HideInInspector] private float rayrange = 2f;
+        [HideInInspector] private bool paused = false;
 
         public void Knockback(bool right, bool up)
         {
@@ -46,10 +47,9 @@ namespace FG
             Vector2 knockbackDir = Vector2.zero;
             knockbackDir.y = up ? 1f : -1f;
             knockbackDir.x = right ? 1f : -1f;
-            knockbackDir.Normalize();
-            print(knockbackDir);
+            knockbackDir = knockbackDir.normalized * knockbackSpeed;
 
-            body.AddForce(knockbackDir * knockbackSpeed);
+            body.AddForce(knockbackDir, ForceMode2D.Impulse);
         }
 
         private void OnMove(InputValue value)
@@ -62,21 +62,42 @@ namespace FG
 
         private void OnFallthrough(InputValue input)
         {
-            if (input.isPressed && onGround)
+            if (!input.isPressed || !onGround) return;
+
+            RaycastHit2D hit =
+                Physics2D.Raycast(transform.position, -transform.up, rayrange, floorMaks);
+            if (hit.collider != null && hit.collider.CompareTag("Platform"))
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -0.5f, 0f), -transform.up, rayrange);
-                if (hit.collider != null && hit.collider.CompareTag("Platform"))
-                    platformpassing.Fall();
+                platformpassing.Fall();
             }
+        }
+
+        private bool Togglepause()
+        {
+            if (Time.timeScale == 0f)
+            {
+                Time.timeScale = 1f;
+                return (false);
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                return (true);
+            }
+        }
+
+        private void OnMenu(InputValue input)
+        {
+            paused = Togglepause();
         }
 
         private void OnDash(InputValue value)
         {
-            if (!dashing && !onGround)
-            {
-                dashing = true;
-                body.AddForce(Vector2.right * transform.localScale.x * dashForce * -1f);
-            }
+            if (dashing || onGround || bonking) return;
+
+            jumping = false;
+            dashing = true;
+            body.AddForce(Vector2.right * transform.localScale.x * dashForce * -1f, ForceMode2D.Impulse);
         }
 
         private void FixedUpdate()
@@ -94,11 +115,10 @@ namespace FG
                 playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0, Vector2.down,
                 SMALL_OFFSET, floorMaks);
 
-            if (onGround)
-            {
-                bonking = false;
-                dashing = false;
-            }
+            if (!onGround) return;
+
+            bonking = false;
+            dashing = false;
         }
 
         private void Walk()
@@ -139,18 +159,15 @@ namespace FG
 
         private void Dash()
         {
-            if (dashing)
-            {
-                RaycastHit2D sideCheck = Physics2D.BoxCast((Vector2) transform.position + playerCollider.offset,
-                    playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0,
-                    Vector2.right * transform.localScale.x * -1f,
-                    SMALL_OFFSET, floorMaks);
-                if (sideCheck)
-                {
-                    dashing = false;
-                    Knockback(Mathf.Approximately(transform.localScale.x, 1f), true);
-                }
-            }
+            if (!dashing) return;
+            RaycastHit2D sideCheck = Physics2D.BoxCast((Vector2) transform.position + playerCollider.offset,
+                playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0,
+                Vector2.right * transform.localScale.x * -1f,
+                SMALL_OFFSET, floorMaks);
+
+            if (!sideCheck) return;
+            dashing = false;
+            Knockback(Mathf.Approximately(transform.localScale.x, 1f), true);
         }
 
         private void Animate()
@@ -172,6 +189,16 @@ namespace FG
             body = GetComponent<Rigidbody2D>();
             playerCollider = GetComponent<CapsuleCollider2D>();
             animController = GetComponentInChildren<PlayerAnimationController>();
+        }
+
+        void OnGUI()
+        {
+            if (paused)
+            {
+                GUILayout.Label("Game is paused! Hit ESC to unpause");
+                if (GUILayout.Button("Click me to quit"))
+                    Application.Quit();
+            }
         }
     }
 }
