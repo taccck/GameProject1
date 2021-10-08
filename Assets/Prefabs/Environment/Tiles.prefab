@@ -2332,6 +2332,7 @@ MonoBehaviour:
   multicatchup: 1
   speedupdateinterval: 1
   player: {fileID: 0}
+  ylavastart: 5
 --- !u!114 &8292975057177121269
 MonoBehaviour:
   m_ObjectHideFlags: 0
