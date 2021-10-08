@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 4536712816542843336}
   inventory: {fileID: 4536712816542843347}
-  invultime: 1
+  invultime: 1.337
 --- !u!114 &2829259771513367442
 MonoBehaviour:
   m_ObjectHideFlags: 0

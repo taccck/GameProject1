@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace FG
         [SerializeField] private PlayerInventory inventory;
         [SerializeField] private float invultime = 1f;
 
+        private SpriteRenderer spriteRenderer;
         [HideInInspector] private bool invul = false;
         [HideInInspector] private Coroutine invulroutine;
 
@@ -19,13 +21,26 @@ namespace FG
             yield return new WaitForSeconds(invultime);
             invul = false;
         }
+        
+        private IEnumerator InvulAnim()
+        {
+            for(float currTime = 0; currTime < invultime; currTime += Time.fixedDeltaTime)
+            {
+                Color newColor = spriteRenderer.color;
+                newColor.a = Mathf.Sin((currTime + .835f) * 18.8f) * .5f + .5f;
+                spriteRenderer.color = newColor;
+                yield return new WaitForSeconds(Time.fixedDeltaTime);
+            }
+            invul = false;
+            spriteRenderer.color = Color.white;
+        }
 
         private void Collision()
         {
             if (!invul)
             {
                 invul = true;
-                invulroutine = StartCoroutine("Invulperiod");
+                invulroutine = StartCoroutine(InvulAnim());
                 inventory.Drop();
             }
         }
@@ -46,6 +61,11 @@ namespace FG
             {
                 Collision();
             }
+        }
+
+        private void Awake()
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
     }
 }
