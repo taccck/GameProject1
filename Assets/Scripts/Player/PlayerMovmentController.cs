@@ -64,12 +64,9 @@ namespace FG
         {
             if (!input.isPressed || !onGround) return;
 
-            RaycastHit2D hit =
-                Physics2D.Raycast(transform.position, -transform.up, rayrange, floorMaks);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, rayrange, floorMaks);
             if (hit.collider != null && hit.collider.CompareTag("Platform"))
-            {
                 platformpassing.Fall();
-            }
         }
 
         private bool Togglepause()
