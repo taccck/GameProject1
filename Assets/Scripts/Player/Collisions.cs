@@ -33,6 +33,7 @@ namespace FG
                 yield return new WaitForSeconds(Time.fixedDeltaTime);
             }
             invul = false;
+            inventory.CanPickup = true;
             spriteRenderer.color = Color.white;
         }
 
@@ -40,6 +41,7 @@ namespace FG
         {
             if (!invul)
             {
+                inventory.CanPickup = false;
                 invul = true;
                 invulroutine = StartCoroutine(InvulAnim());
                 inventory.Drop();

@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a9738cd7aabfd438026ac152414ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothness: 0.85
   playerpos: {fileID: 0}
 --- !u!114 &680143711410766509
 MonoBehaviour:

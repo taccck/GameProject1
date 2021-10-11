@@ -4,6 +4,8 @@ using Random = UnityEngine.Random;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [NonSerialized] public bool CanPickup = true;
+    
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private float dropSpeed;
     [SerializeField] private ItemIcon[] icons;
@@ -16,6 +18,8 @@ public class PlayerInventory : MonoBehaviour
 
     public bool Add(Item itemToAdd)
     {
+        if (!CanPickup) return false;
+        
         for (int i = 0; i < 5; i++)
         {
             if (inventory[i] != null) continue;
