@@ -44,6 +44,7 @@ namespace FG
         public void Knockback(bool right, bool up)
         {
             bonking = true;
+            AudioManager.Curr.Play("Bonk");
             Vector2 knockbackDir = Vector2.zero;
             knockbackDir.y = up ? 1f : -1f;
             knockbackDir.x = right ? 1f : -1f;
@@ -58,7 +59,11 @@ namespace FG
             walking = walkDirection != 0;
         }
 
-        private void OnJump(InputValue value) => jumping = value.isPressed && onGround;
+        private void OnJump(InputValue value) 
+        {
+            jumping = value.isPressed && onGround;
+            if (jumping) AudioManager.Curr.Play("Jump");
+        }
 
         private void OnFallthrough(InputValue input)
         {
