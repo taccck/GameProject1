@@ -11,15 +11,13 @@ namespace FG
         [SerializeField] private float gravity = 1f;
         [SerializeField] private float angle = 45f;
 
-        [HideInInspector] private LayerMask playermask;
+        [HideInInspector] private LayerMask collisionmask;
 
         private void FixedUpdate()
         {
-            if (Vector3.Angle(-transform.up, player.position) < angle)
+            if (180f - Vector3.Angle(Vector3.up + transform.position, -(transform.position - player.position)) < angle)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, player.position, Vector3.Distance(transform.position, player.position), playermask);
-                if(hit.collider != null)
-                    Debug.Log(hit.collider.tag);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, -(transform.position - player.position).normalized, Vector3.Distance(transform.position, player.position), collisionmask);
                 if (hit.collider != null && hit.collider.CompareTag("Player"))
                     body.gravityScale = gravity;
             }
@@ -27,7 +25,7 @@ namespace FG
 
         private void Awake()
         {
-            playermask = LayerMask.GetMask("Player");
+            collisionmask = LayerMask.GetMask("Floor", "Player");
         }
     }
 }
