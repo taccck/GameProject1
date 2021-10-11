@@ -64,13 +64,21 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6935ef54ed48cd241abedcb1bfaaca2b, type: 2}
     - {fileID: 11400000, guid: 9c987a428b3861841ab144b5e13481ff, type: 2}
     sprite: {fileID: 21300000, guid: adac42eafe13cc144998762f8bf42929, type: 3}
+  - name: Chocolate Cake
+    ingredients:
+    - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
+    - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
+    - {fileID: 11400000, guid: 58bda2cd3e84a5c47b6f70d879ebde1a, type: 2}
+    - {fileID: 11400000, guid: 6935ef54ed48cd241abedcb1bfaaca2b, type: 2}
+    - {fileID: 11400000, guid: 86e40344f374f554ba68ed691527dbef, type: 2}
+    sprite: {fileID: 0}
   - name: Fruit  Pie
     ingredients:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
     - {fileID: 11400000, guid: 6935ef54ed48cd241abedcb1bfaaca2b, type: 2}
     - {fileID: 11400000, guid: 9c987a428b3861841ab144b5e13481ff, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 710ddd1be85eea64f8014fd55115a6c2, type: 3}
   - name: Chocolate dipped strawberries
     ingredients:
     - {fileID: 11400000, guid: 9c987a428b3861841ab144b5e13481ff, type: 2}
@@ -81,7 +89,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: 86e40344f374f554ba68ed691527dbef, type: 2}
     - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 68a78dc544354c64db2d91964c953d12, type: 3}
   - name: Eggs & Bacon
     ingredients:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
@@ -93,13 +101,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
     - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: fd0f2860e5575c344a85fad2cc99cc2d, type: 3}
   - name: Chocolate Meat
     ingredients:
     - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
     - {fileID: 11400000, guid: 86e40344f374f554ba68ed691527dbef, type: 2}
     - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 55c5e82a0c1ac724f92bc37f4e1c71a4, type: 3}
   - name: Meat Pie
     ingredients:
     - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
@@ -107,7 +115,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
     - {fileID: 11400000, guid: d51df884dec80714184cf650bdb6ff43, type: 2}
     - {fileID: 11400000, guid: 8052a9e83986ea14c86fa6c4495023e7, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 04a904e02a428b1499882c5976b39626, type: 3}
   - name: Fancy Omlette
     ingredients:
     - {fileID: 11400000, guid: 58bda2cd3e84a5c47b6f70d879ebde1a, type: 2}
