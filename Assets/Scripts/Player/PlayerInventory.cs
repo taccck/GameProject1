@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -33,23 +34,25 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
-    public void Drop()
+    public bool Drop()
     {
-        int randIndex = Random.Range(0, inventory.Length - 1);
-        for (int i = 0; i < 100; i++) //todo better implementation
+        List<int> populatedSlots = new List<int>();
+        for (int i = 0; i < inventory.Length; i++)
         {
-            if (inventory[randIndex] != null) break;
-            randIndex = Random.Range(0, inventory.Length - 1);
-
-            if (i == 99) return;
+            if (inventory[i] != null)
+                populatedSlots.Add(i);
         }
+        if (populatedSlots.Count == 0) return false;
+        
+        int randIndex = Random.Range(0, populatedSlots.Count - 1);
+        randIndex = populatedSlots[randIndex];
 
-        Drop(randIndex);
+        return Drop(randIndex);
     }
 
-    private void Drop(int index)
+    private bool Drop(int index)
     {
-        if (inventory[index] == null) return;
+        if (inventory[index] == null) return false;
         
         GameObject dropItem = Instantiate(itemPrefab);
         RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, Vector2.up, DROP_OFFSET, floorMask);
@@ -64,6 +67,7 @@ public class PlayerInventory : MonoBehaviour
         inventory[index] = null;
 
         UpdateUI();
+        return true;
     }
 
     private void UpdateUI()
