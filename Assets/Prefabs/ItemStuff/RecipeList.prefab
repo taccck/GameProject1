@@ -64,6 +64,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6935ef54ed48cd241abedcb1bfaaca2b, type: 2}
     - {fileID: 11400000, guid: 9c987a428b3861841ab144b5e13481ff, type: 2}
     sprite: {fileID: 21300000, guid: adac42eafe13cc144998762f8bf42929, type: 3}
+  - name: Chocolate Cake
+    ingredients:
+    - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
+    - {fileID: 11400000, guid: 2d3b84b5e4a14c34c8df7647eece8654, type: 2}
+    - {fileID: 11400000, guid: 58bda2cd3e84a5c47b6f70d879ebde1a, type: 2}
+    - {fileID: 11400000, guid: 6935ef54ed48cd241abedcb1bfaaca2b, type: 2}
+    - {fileID: 11400000, guid: 86e40344f374f554ba68ed691527dbef, type: 2}
+    sprite: {fileID: 21300000, guid: 6bc765d169367614294c03d50543ec32, type: 3}
   - name: Fruit  Pie
     ingredients:
     - {fileID: 11400000, guid: 507b036225315ab41aebedec04e50e6e, type: 2}
