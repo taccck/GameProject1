@@ -8,7 +8,6 @@ namespace FG
     {
         [Tooltip("% / operation")]
         [SerializeField] private float percentage;
-
         [Tooltip("Padding for red bar, in width/2")]
         [SerializeField] private int padding = 1;
 
