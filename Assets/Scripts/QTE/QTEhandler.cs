@@ -27,7 +27,7 @@ namespace FG
             while (true)
             {
                 circle.Addprogress();
-                if (circle.Isfilled() >= 5)
+                if (circle.Isfilled())
                     break;
                 yield return new WaitForSeconds(0.5f);
             }

@@ -6,11 +6,13 @@ namespace FG
 {
     public class Progressbar : MonoBehaviour
     {
-        [Tooltip("% / operation")]
+        [Tooltip("% / interval")]
         [SerializeField] private float percentage;
+        [SerializeField] private float interval = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
+        [HideInInspector] private bool started = false;
 
         public bool Isfilled()
         {
@@ -19,10 +21,29 @@ namespace FG
             return false;
         }
 
-        public void Addprogress()
+        public bool Startbar()
         {
-            progress.localScale += new Vector3(percentage, 0);
-            progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f, progress.localPosition.y);
+            if(!started)
+            {
+                started = true;
+                StartCoroutine("Addprogress");
+                return true;
+            }
+            return false;
+        }
+
+        private IEnumerator Addprogress()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(interval);
+
+                progress.localScale += new Vector3(percentage, 0);
+                progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f, progress.localPosition.y);
+                
+                if (Isfilled())
+                    break;
+            }
         }
 
         private void Awake()

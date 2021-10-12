@@ -6,40 +6,61 @@ namespace FG
 {
     public class Clickzone : MonoBehaviour
     {
-        [Tooltip("% / operation")]
+        [Tooltip("% / interval")]
         [SerializeField] private float percentage;
         [Tooltip("Padding for red bar, in width/2")]
         [SerializeField] private int padding = 1;
+        [SerializeField] private float interval = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
         [HideInInspector] private Transform red;
         [HideInInspector] private bool goright = true;
+        [HideInInspector] private bool started = false;
 
-        public void Addprogress()
-        {
-            if (goright)
-            {
-                progress.localPosition += new Vector3(percentage, red.localPosition.y);
-
-                if (progress.localPosition.x >= bar.localScale.x / 2f)
-                    goright = false;
-            }
-            else if (!goright)
-            {
-                progress.localPosition -= new Vector3(percentage, red.localPosition.y);
-
-                if (progress.localPosition.x <= -bar.localScale.x / 2f)
-                    goright = true;
-            }
-        }
-
-        public bool Isinzone()
+        public bool Isfilled()
         {
             RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
-            if(hit.collider != null && hit.collider.CompareTag("Progbar"))
+            if (hit.collider != null && hit.collider.CompareTag("Progbar"))
                 return true;
             return false;
+        }
+
+        public bool Startbar()
+        {
+            if (!started)
+            {
+                started = true;
+                StartCoroutine("Addprogress");
+                return true;
+            }
+            return false;
+        }
+
+        private IEnumerator Addprogress()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(interval);
+
+                if (goright)
+                {
+                    progress.localPosition += new Vector3(percentage, red.localPosition.y);
+
+                    if (progress.localPosition.x >= bar.localScale.x / 2f)
+                        goright = false;
+                }
+                else if (!goright)
+                {
+                    progress.localPosition -= new Vector3(percentage, red.localPosition.y);
+
+                    if (progress.localPosition.x <= -bar.localScale.x / 2f)
+                        goright = true;
+                }
+                
+                if (Isfilled())
+                    break;
+            }
         }
 
         private void Redloc()

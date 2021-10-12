@@ -6,26 +6,49 @@ namespace FG
 {
     public class Progresscircle : MonoBehaviour
     {
-        [Tooltip("% / operation")]
+        [Tooltip("% / interval")]
         [SerializeField] private float percentage;
+        [SerializeField] private float interval = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform circle;
         [HideInInspector] private bool swapped = false;
+        [HideInInspector] private bool started = false;
 
-        public float Isfilled()
+        public bool Isfilled()
         {
-            return (progress.localScale.x / circle.localScale.x);
+            if (progress.localScale.x / circle.localScale.x == 1)
+                return true;
+            return false;
         }
 
-        public void Addprogress()
+        public bool Startbar()
         {
-            progress.localScale += new Vector3(percentage, percentage);
-
-            if (!swapped && progress.localScale.x > circle.localScale.x)
+            if (!started)
             {
-                circle.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                swapped = true;
+                started = true;
+                StartCoroutine("Addprogress");
+                return true;
+            }
+            return false;
+        }
+
+        private IEnumerator Addprogress()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(interval);
+
+                progress.localScale += new Vector3(percentage, percentage);
+
+                if (!swapped && progress.localScale.x > circle.localScale.x)
+                {
+                    circle.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                    swapped = true;
+                }
+                
+                if (Isfilled())
+                    break;
             }
         }
 

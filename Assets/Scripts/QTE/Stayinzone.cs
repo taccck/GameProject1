@@ -6,7 +6,7 @@ namespace FG
 {
     public class Stayinzone : MonoBehaviour
     {
-        [Tooltip("% / operation")]
+        [Tooltip("% / interval")]
         [SerializeField] private float percentage;
         [Tooltip("% lost / operation")]
         [SerializeField] private float percentageloss = 0;
@@ -17,6 +17,7 @@ namespace FG
         [Tooltip("Gap between the bars")]
         [SerializeField] private float gap = 0.5f;
         [SerializeField] private float cooldown = 1f;
+        [SerializeField] private float interval = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
@@ -26,8 +27,27 @@ namespace FG
         [HideInInspector] private bool goright = true;
         [HideInInspector] private Coroutine cooldownroutine;
         [HideInInspector] private bool cd = false;
+        [HideInInspector] private bool started = false;
 
         public bool Isfilled()
+        {
+            if (opsdone == operations)
+                return true;
+            return false;
+        }
+
+        public bool Startbar()
+        {
+            if (!started)
+            {
+                started = true;
+                StartCoroutine("Addprogress");
+                return true;
+            }
+            return false;
+        }
+
+        public void Clickme()
         {
             if (Isinzone() && !cd)
             {
@@ -35,27 +55,31 @@ namespace FG
                 cd = true;
                 cooldownroutine = StartCoroutine("Cooldown");
             }
-
-            if (opsdone == operations)
-                return true;
-            return false;
         }
 
-        public void Addprogress()
+        private IEnumerator Addprogress()
         {
-            if (goright)
+            while (true)
             {
-                progress.localPosition += new Vector3(percentage, red.localPosition.y);
+                yield return new WaitForSeconds(interval);
 
-                if (progress.localPosition.x + progress.localScale.x / 2 >= bar.localScale.x / 2f)
-                    goright = false;
-            }
-            else if (!goright)
-            {
-                progress.localPosition -= new Vector3(percentage, red.localPosition.y);
+                if (goright)
+                {
+                    progress.localPosition += new Vector3(percentage, red.localPosition.y);
 
-                if (progress.localPosition.x - progress.localScale.x / 2 <= -bar.localScale.x / 2f)
-                    goright = true;
+                    if (progress.localPosition.x + progress.localScale.x / 2 >= bar.localScale.x / 2f)
+                        goright = false;
+                }
+                else if (!goright)
+                {
+                    progress.localPosition -= new Vector3(percentage, red.localPosition.y);
+
+                    if (progress.localPosition.x - progress.localScale.x / 2 <= -bar.localScale.x / 2f)
+                        goright = true;
+                }
+
+                if (Isfilled())
+                    break;
             }
         }
 
