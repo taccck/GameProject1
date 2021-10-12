@@ -81,25 +81,6 @@ namespace FG
                 platformpassing.Fall();
         }
 
-        /*private bool Togglepause()
-        {
-            if (Time.timeScale == 0f)
-            {
-                Time.timeScale = 1f;
-                return (false);
-            }
-            else
-            {
-                Time.timeScale = 0f;
-                return (true);
-            }
-        }*/
-
-        /*private void OnMenu(InputValue input)
-        {
-            paused = Togglepause();
-        }*/
-
         private void OnDash(InputValue value)
         {
             if (dashing || onGround || bonking) return;
@@ -187,6 +168,8 @@ namespace FG
                 animController.ChangeAnimationState(animController.Dash);
             else if (jumping)
                 animController.ChangeAnimationState(animController.Jump);
+            else if (walking)
+                animController.ChangeAnimationState(animController.Walk);
             else if (onGround)
                 animController.ChangeAnimationState(animController.Idle);
         }
@@ -199,15 +182,5 @@ namespace FG
             playerCollider = GetComponent<CapsuleCollider2D>();
             animController = GetComponentInChildren<PlayerAnimationController>();
         }
-
-        /*void OnGUI()
-        {
-            if (paused)
-            {
-                GUILayout.Label("Game is paused! Hit ESC to unpause");
-                if (GUILayout.Button("Click me to quit"))
-                    Application.Quit();
-            }
-        }*/
     }
 }

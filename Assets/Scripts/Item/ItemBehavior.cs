@@ -97,7 +97,7 @@ public class ItemBehavior : MonoBehaviour
             Lavaraiser doIExist = other.transform.GetComponent<Lavaraiser>();
             if (doIExist != null)
             {
-               destroying = StartCoroutine(DestroyMe(burnParticles));
+                destroying = StartCoroutine(DestroyMe(burnParticles));
             }
         }
     }
@@ -137,7 +137,8 @@ public class ItemBehavior : MonoBehaviour
         //items fall through floor on start
         body.gravityScale = 0f;
         yield return new WaitForSeconds(1f);
-        body.gravityScale = 1f;
+        if (body != null)
+            body.gravityScale = 1f;
         waitOnstart = false;
     }
 
