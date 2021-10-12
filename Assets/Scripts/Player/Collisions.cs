@@ -40,7 +40,7 @@ namespace FG
         private IEnumerator NoPickup()
         {
             inventory.CanPickup = false;
-            yield return new WaitForSeconds(invultime);
+            yield return new WaitForSeconds(.33f);
             inventory.CanPickup = true;
         }
 
