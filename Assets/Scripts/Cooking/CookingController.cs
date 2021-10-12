@@ -8,6 +8,7 @@ public class CookingController : MonoBehaviour
     [SerializeField] private Progressbar progBar;
     [SerializeField] private Progresscircle progCircle;
     [SerializeField] private Stayinzone progZone;
+    [SerializeField] private Clickzone progClick;
 
 
     [Header("Animation"), SerializeField] private Sprite success;
@@ -41,6 +42,10 @@ public class CookingController : MonoBehaviour
         else if (progZone != null)
         {
             Outcome(progZone.Isfilled());
+        }
+        else if (progClick != null)
+        {
+            Outcome(progClick.Isinzone());
         }
     }
 

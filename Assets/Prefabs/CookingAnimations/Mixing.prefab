@@ -132,7 +132,7 @@ Transform:
   m_Children:
   - {fileID: 3859807011785102910}
   - {fileID: 3859807010212084630}
-  - {fileID: 2272545274942137044}
+  - {fileID: 2279381224080967161}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -150,8 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 6
   progBar: {fileID: 0}
-  progCircle: {fileID: 2272545274942137047}
+  progCircle: {fileID: 2279381224080967162}
   progZone: {fileID: 0}
+  progClick: {fileID: 0}
   success: {fileID: 0}
   fail: {fileID: 0}
   toSwap: {fileID: 0}
@@ -239,7 +240,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &2304175566511427233
+--- !u!1001 &2292998233861777804
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -253,6 +254,14 @@ PrefabInstance:
     - target: {fileID: 32546210554801269, guid: f5a23c4d0cd58ff449e2ebecb44ee403, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 32546210554801269, guid: f5a23c4d0cd58ff449e2ebecb44ee403, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 32546210554801269, guid: f5a23c4d0cd58ff449e2ebecb44ee403, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: 32546210554801269, guid: f5a23c4d0cd58ff449e2ebecb44ee403, type: 3}
       propertyPath: m_LocalPosition.z
@@ -288,15 +297,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5a23c4d0cd58ff449e2ebecb44ee403, type: 3}
---- !u!4 &2272545274942137044 stripped
+--- !u!4 &2279381224080967161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 32546210554801269, guid: f5a23c4d0cd58ff449e2ebecb44ee403, type: 3}
-  m_PrefabInstance: {fileID: 2304175566511427233}
+  m_PrefabInstance: {fileID: 2292998233861777804}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2272545274942137047 stripped
+--- !u!114 &2279381224080967162 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 32546210554801270, guid: f5a23c4d0cd58ff449e2ebecb44ee403, type: 3}
-  m_PrefabInstance: {fileID: 2304175566511427233}
+  m_PrefabInstance: {fileID: 2292998233861777804}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

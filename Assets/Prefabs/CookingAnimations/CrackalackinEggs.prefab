@@ -132,7 +132,7 @@ Transform:
   m_Children:
   - {fileID: 8183143776422448048}
   - {fileID: 8183143776925076701}
-  - {fileID: 8052420549928763604}
+  - {fileID: 6810651965280587899}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -152,6 +152,7 @@ MonoBehaviour:
   progBar: {fileID: 0}
   progCircle: {fileID: 0}
   progZone: {fileID: 0}
+  progClick: {fileID: 6810651965280587892}
   success: {fileID: 21300000, guid: ba60423e335b9434f981a09010de0604, type: 3}
   fail: {fileID: 21300000, guid: efa3b6a80e90679439c29691db8d0df3, type: 3}
   toSwap: {fileID: 8183143776422448049}
@@ -239,7 +240,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &3578476669511940904
+--- !u!1001 &41367617874357127
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -249,6 +250,14 @@ PrefabInstance:
     - target: {fileID: 6779813280166149116, guid: fe6f037fa9a1677499416d9aaa964439, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6779813280166149116, guid: fe6f037fa9a1677499416d9aaa964439, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6779813280166149116, guid: fe6f037fa9a1677499416d9aaa964439, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.46
       objectReference: {fileID: 0}
     - target: {fileID: 6779813280166149116, guid: fe6f037fa9a1677499416d9aaa964439, type: 3}
       propertyPath: m_LocalPosition.z
@@ -288,8 +297,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe6f037fa9a1677499416d9aaa964439, type: 3}
---- !u!4 &8052420549928763604 stripped
+--- !u!4 &6810651965280587899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6779813280166149116, guid: fe6f037fa9a1677499416d9aaa964439, type: 3}
-  m_PrefabInstance: {fileID: 3578476669511940904}
+  m_PrefabInstance: {fileID: 41367617874357127}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6810651965280587892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6779813280166149107, guid: fe6f037fa9a1677499416d9aaa964439, type: 3}
+  m_PrefabInstance: {fileID: 41367617874357127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978160ed91ccc834f82075e3f780913f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

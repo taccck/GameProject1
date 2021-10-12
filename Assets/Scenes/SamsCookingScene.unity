@@ -742,10 +742,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1149524899755724761, guid: f2e613197b7f30240b35f3896e26e8a5, type: 3}
-      propertyPath: time
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2e613197b7f30240b35f3896e26e8a5, type: 3}
 --- !u!1001 &1920482507329303772
@@ -1591,6 +1587,10 @@ PrefabInstance:
     - target: {fileID: 8183143776710967940, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}
       propertyPath: m_Name
       value: CrackalackinEggs
+      objectReference: {fileID: 0}
+    - target: {fileID: 8183143776710967940, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8183143776710967941, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}
       propertyPath: m_RootOrder
