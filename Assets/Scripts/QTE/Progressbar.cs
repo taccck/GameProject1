@@ -22,7 +22,7 @@ namespace FG
         public void Addprogress()
         {
             progress.localScale += new Vector3(percentage, 0);
-            progress.localPosition = new Vector3((-bar.localScale.x / 2) + progress.localScale.x / 2, progress.localPosition.y);
+            progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f, progress.localPosition.y);
         }
 
         private void Awake()
@@ -32,7 +32,7 @@ namespace FG
 
             progress.localScale = new Vector3(0, progress.localScale.y);
 
-            percentage *= bar.localScale.x / 100;
+            percentage *= bar.localScale.x / 100f;
         }
     }
 }
