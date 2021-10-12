@@ -49,7 +49,7 @@ namespace FG
         {
             if (!invul)
             {
-                if (!inventory.Drop()) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                if (!inventory.Drop()) Death();
 
                 inventory.CanPickup = false;
                 invul = true;
@@ -61,12 +61,17 @@ namespace FG
 
         private void LavaCollision()
         {
-            if (!inventory.Drop()) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (!inventory.Drop()) Death();
             movementController.LavaKnockback();
             movementController.bonking = false;
             
             if (noPickupRoutine != null) StopCoroutine(noPickupRoutine);
             noPickupRoutine = StartCoroutine(NoPickup());
+        }
+
+        public void Death()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

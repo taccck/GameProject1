@@ -81,7 +81,7 @@ namespace FG
                 platformpassing.Fall();
         }
 
-        private bool Togglepause()
+        /*private bool Togglepause()
         {
             if (Time.timeScale == 0f)
             {
@@ -93,12 +93,12 @@ namespace FG
                 Time.timeScale = 0f;
                 return (true);
             }
-        }
+        }*/
 
-        private void OnMenu(InputValue input)
+        /*private void OnMenu(InputValue input)
         {
             paused = Togglepause();
-        }
+        }*/
 
         private void OnDash(InputValue value)
         {
@@ -200,7 +200,7 @@ namespace FG
             animController = GetComponentInChildren<PlayerAnimationController>();
         }
 
-        void OnGUI()
+        /*void OnGUI()
         {
             if (paused)
             {
@@ -208,6 +208,6 @@ namespace FG
                 if (GUILayout.Button("Click me to quit"))
                     Application.Quit();
             }
-        }
+        }*/
     }
 }

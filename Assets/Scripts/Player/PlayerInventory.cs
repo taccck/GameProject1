@@ -5,22 +5,23 @@ using Random = UnityEngine.Random;
 
 public class PlayerInventory : MonoBehaviour
 {
+    public Item[] inventory = new Item[5];
+
     [NonSerialized] public bool CanPickup = true;
-    
+
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private float dropSpeed;
     [SerializeField] private ItemIcon[] icons;
 
     private LayerMask floorMask;
-
-    private readonly Item[] inventory = new Item[5];
+    private SaveManager saveManager;
 
     private const float DROP_OFFSET = 1.5f;
 
     public bool Add(Item itemToAdd)
     {
         if (!CanPickup) return false;
-        
+
         for (int i = 0; i < 5; i++)
         {
             if (inventory[i] != null) continue;
@@ -42,8 +43,9 @@ public class PlayerInventory : MonoBehaviour
             if (inventory[i] != null)
                 populatedSlots.Add(i);
         }
+
         if (populatedSlots.Count == 0) return false;
-        
+
         int randIndex = Random.Range(0, populatedSlots.Count - 1);
         randIndex = populatedSlots[randIndex];
 
@@ -53,7 +55,7 @@ public class PlayerInventory : MonoBehaviour
     private bool Drop(int index)
     {
         if (inventory[index] == null) return false;
-        
+
         GameObject dropItem = Instantiate(itemPrefab);
         RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, Vector2.up, DROP_OFFSET, floorMask);
         float spawnDist = hit ? hit.distance : DROP_OFFSET;
@@ -107,5 +109,10 @@ public class PlayerInventory : MonoBehaviour
     private void OnDrop5()
     {
         Drop(4);
+    }
+
+    private void Awake()
+    {
+        saveManager = GetComponent<SaveManager>();
     }
 }
