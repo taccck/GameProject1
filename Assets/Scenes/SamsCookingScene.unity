@@ -1128,10 +1128,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3859807011192414195, guid: 0d3ee4da874dc4943a1a867bf68a8388, type: 3}
-      propertyPath: time
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d3ee4da874dc4943a1a867bf68a8388, type: 3}
 --- !u!1001 &4362845091862103838
@@ -1596,10 +1592,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrackalackinEggs
       objectReference: {fileID: 0}
-    - target: {fileID: 8183143776710967940, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8183143776710967941, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1643,10 +1635,6 @@ PrefabInstance:
     - target: {fileID: 8183143776710967941, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183143776710968186, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}
-      propertyPath: time
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8acc838f43cba424b804cb59838a2a14, type: 3}

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using FG;
 using UnityEngine;
@@ -8,9 +7,9 @@ public class CookingController : MonoBehaviour
     [Header("Event"), SerializeField] private float time;
     [SerializeField] private Progressbar progBar;
     [SerializeField] private Progresscircle progCircle;
-    [SerializeField] private Stayinzone progZone; 
+    [SerializeField] private Stayinzone progZone;
 
-    
+
     [Header("Animation"), SerializeField] private Sprite success;
     [SerializeField] private Sprite fail;
     [SerializeField] private SpriteRenderer toSwap;
@@ -22,11 +21,10 @@ public class CookingController : MonoBehaviour
         if (toHide != null)
             toHide.color = new Color(0, 0, 0, 0);
         toStop.enabled = false;
-        
+
         if (fail == null || success == null) return;
-        
+
         toSwap.sprite = outcome ? success : fail;
-        
     }
 
     private IEnumerator CookTime()
@@ -38,7 +36,7 @@ public class CookingController : MonoBehaviour
         }
         else if (progCircle != null)
         {
-            //Outcome(progCircle.Isfilled());
+            Outcome(progCircle.Isfilled() > 1f);
         }
         else if (progZone != null)
         {
