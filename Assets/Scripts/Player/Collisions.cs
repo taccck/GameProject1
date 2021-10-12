@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +11,7 @@ namespace FG
 
         private SpriteRenderer spriteRenderer;
         private PlayerMovmentController movementController;
+        private ParticleSystem deathParticles;
         [HideInInspector] private bool invul = false;
         [HideInInspector] private Coroutine invulroutine;
         private Coroutine noPickupRoutine;
@@ -71,6 +70,18 @@ namespace FG
 
         public void Death()
         {
+            StartCoroutine(DeathAnim());
+        }
+
+        private IEnumerator DeathAnim()
+        {
+            spriteRenderer.color = Color.black;
+            Destroy(movementController);
+            Destroy(GetComponent<CapsuleCollider2D>());
+            Destroy(GetComponent<Rigidbody2D>());
+            Destroy(inventory);
+            deathParticles.Play();
+            yield return new WaitForSeconds(1f);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -96,6 +107,8 @@ namespace FG
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             movementController = GetComponent<PlayerMovmentController>();
+            deathParticles = GetComponentInChildren<ParticleSystem>();
+            deathParticles.GetComponent<Renderer>().sortingLayerName = "Particles";
         }
     }
 }
