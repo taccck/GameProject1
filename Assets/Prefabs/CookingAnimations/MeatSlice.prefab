@@ -147,6 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20855901f0935914bb3db3f880dfb938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 6
+  progBar: {fileID: 0}
+  progCircle: {fileID: 0}
+  progZone: {fileID: 0}
   success: {fileID: 21300000, guid: 624c9070aafc1634c8f185d0ce4412fe, type: 3}
   fail: {fileID: 21300000, guid: 17e888866f2fc0d43a1c4273da00fca9, type: 3}
   toSwap: {fileID: 8366744324967246381}
