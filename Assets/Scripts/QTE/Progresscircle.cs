@@ -13,11 +13,9 @@ namespace FG
         [HideInInspector] private Transform circle;
         [HideInInspector] private bool swapped = false;
 
-        public bool Isfilled()
+        public float Isfilled()
         {
-            if (progress.localScale.x >= circle.localScale.x * 2)
-                return true;
-            return false;
+            return (progress.localScale.x / circle.localScale.x);
         }
 
         public void Addprogress()
@@ -38,7 +36,7 @@ namespace FG
 
             progress.localScale = new Vector3(0, 0);
 
-            percentage *= circle.localScale.x / 100;
+            percentage *= circle.localScale.x / 100f;
         }
     }
 }

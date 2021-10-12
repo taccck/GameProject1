@@ -8,6 +8,8 @@ namespace FG
     {
         [SerializeField] private Progressbar bar;
         [SerializeField] private Progresscircle circle;
+        [SerializeField] private Stayinzone stay;
+        [SerializeField] private Clickzone click;
 
         private IEnumerator Updatebar()
         {
@@ -25,7 +27,28 @@ namespace FG
             while (true)
             {
                 circle.Addprogress();
-                if (circle.Isfilled())
+                if (circle.Isfilled() >= 5)
+                    break;
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+        private IEnumerator Updatestay()
+        {
+            while (true)
+            {
+                stay.Addprogress();
+                if (stay.Isfilled())
+                    break;
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        private IEnumerator Updateclick()
+        {
+            while (true)
+            {
+                click.Addprogress();
+                if (click.Isinzone())
                     break;
                 yield return new WaitForSeconds(0.5f);
             }
@@ -35,6 +58,8 @@ namespace FG
         {
             StartCoroutine("Updatebar");
             StartCoroutine("Updatecircle");
+            StartCoroutine("Updatestay");
+            StartCoroutine("Updateclick");
         }
     }
 }
