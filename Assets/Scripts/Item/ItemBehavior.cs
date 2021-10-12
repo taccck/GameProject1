@@ -16,21 +16,24 @@ public class ItemBehavior : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private ParticleSystem pickupParticles;
     private ParticleSystem burnParticles;
-    private BoxCollider2D collider;
+    private BoxCollider2D boxCollider;
     private Vector2 colliderSize;
+    private Coroutine destroying;
 
     private void Update()
     {
         //check when to stop falling
-        if (Mathf.Approximately(body.gravityScale, 1f))
-            body.gravityScale = FloorCheck() ? 0f : 1f;
+        if (destroying == null)
+            if (Mathf.Approximately(body.gravityScale, 1f))
+                body.gravityScale = FloorCheck() ? 0f : 1f;
     }
 
     private void FixedUpdate()
     {
         //bobble when on ground
-        if (Mathf.Approximately(body.gravityScale, 0f) && !waitOnstart)
-            Bobble();
+        if (destroying == null)
+            if (Mathf.Approximately(body.gravityScale, 0f) && !waitOnstart)
+                Bobble();
     }
 
     private bool FloorCheck() //todo can fall through the floor if it's moving faster than stopDistance
@@ -40,8 +43,8 @@ public class ItemBehavior : MonoBehaviour
         if (onFloor)
         {
             body.velocity = Vector2.zero;
-            if (collider != null)
-                collider.isTrigger = true;
+            if (boxCollider != null)
+                boxCollider.isTrigger = true;
         }
 
         return onFloor;
@@ -68,16 +71,15 @@ public class ItemBehavior : MonoBehaviour
         //player pickup
         if (other.CompareTag("Player"))
         {
-            if (other.name != "Hatcollider")
-                if (other.GetComponent<PlayerInventory>().Add(item))
-                    StartCoroutine(Pickup());
+            if (other.GetComponent<PlayerInventory>().Add(item))
+                destroying = StartCoroutine(DestroyMe(pickupParticles));
         }
         else if (other.transform.CompareTag("Danger"))
         {
             Lavaraiser doIExist = other.GetComponent<Lavaraiser>();
             if (doIExist != null)
             {
-                StartCoroutine(Burn());
+                destroying = StartCoroutine(DestroyMe(burnParticles));
             }
         }
     }
@@ -87,36 +89,26 @@ public class ItemBehavior : MonoBehaviour
         //player pickup
         if (other.transform.CompareTag("Player"))
         {
-            if (other.transform.name != "Hatcollider")
-                if (other.transform.GetComponent<PlayerInventory>().Add(item))
-                    StartCoroutine(Pickup());
+            if (other.transform.GetComponent<PlayerInventory>().Add(item))
+                destroying = StartCoroutine(DestroyMe(pickupParticles));
         }
         else if (other.transform.CompareTag("Danger"))
         {
             Lavaraiser doIExist = other.transform.GetComponent<Lavaraiser>();
             if (doIExist != null)
             {
-                StartCoroutine(Burn());
+               destroying = StartCoroutine(DestroyMe(burnParticles));
             }
         }
     }
 
-    IEnumerator Pickup()
+    private IEnumerator DestroyMe(ParticleSystem particles)
     {
-        pickupParticles.Play();
-        spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
+        particles.Play();
+        Destroy(spriteRenderer);
         Destroy(GetComponent<BoxCollider2D>());
         Destroy(GetComponent<ShadowCaster2D>());
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
-    }
-
-    IEnumerator Burn()
-    {
-        burnParticles.Play();
-        spriteRenderer.color = new Color(0f, 0f, 0f, 0f);
-        Destroy(GetComponent<BoxCollider2D>());
-        Destroy(GetComponent<ShadowCaster2D>());
+        Destroy(body);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
@@ -155,8 +147,8 @@ public class ItemBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         pickupParticles = transform.GetChild(0).GetComponent<ParticleSystem>();
         burnParticles = transform.GetChild(1).GetComponent<ParticleSystem>();
-        collider = GetComponent<BoxCollider2D>();
-        colliderSize = collider.size;
+        boxCollider = GetComponent<BoxCollider2D>();
+        colliderSize = boxCollider.size;
 
         pickupParticles.GetComponent<Renderer>().sortingLayerName = "Particles";
         burnParticles.GetComponent<Renderer>().sortingLayerName = "Particles";

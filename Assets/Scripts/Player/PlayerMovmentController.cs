@@ -8,7 +8,7 @@ namespace FG
     {
         [NonSerialized] private bool walking;
         [NonSerialized] private bool jumping;
-        [NonSerialized] private bool bonking;
+        [NonSerialized] public bool bonking;
         [NonSerialized] private bool dashing;
 
         [SerializeField, Tooltip("m/s"), Header("Walking")]
@@ -17,14 +17,15 @@ namespace FG
         [SerializeField, Tooltip("Seconds"), Header("Jumping")]
         private float maxJumpTime = .5f;
 
-        [SerializeField, Tooltip("m/s")]
-        private float jumpSpeed = 7f;
+        [SerializeField, Tooltip("m/s")] private float jumpSpeed = 7f;
 
         [SerializeField, Tooltip("kg * m/s"), Header("Dashing")]
-        private float dashForce = .5f;
+        private float dashForce = 8f;
 
         [SerializeField, Tooltip("m/s"), Header("Knockback")]
-        private float knockbackSpeed = 1f;
+        private float knockbackSpeed = 6f;
+
+        [SerializeField] private float lavaKnockbackSpeed = 30f;
 
         private LayerMask floorMaks;
         private Rigidbody2D body;
@@ -53,13 +54,19 @@ namespace FG
             body.velocity = knockbackDir;
         }
 
+        public void LavaKnockback()
+        {
+            Vector2 knockbackDir = Vector2.up * lavaKnockbackSpeed;
+            body.velocity = knockbackDir;
+        }
+
         private void OnMove(InputValue value)
         {
             walkDirection = (int) value.Get<float>();
             walking = walkDirection != 0;
         }
 
-        private void OnJump(InputValue value) 
+        private void OnJump(InputValue value)
         {
             jumping = value.isPressed && onGround;
             if (jumping) AudioManager.Curr.Play("Jump");
@@ -74,7 +81,7 @@ namespace FG
                 platformpassing.Fall();
         }
 
-        private bool Togglepause()
+        /*private bool Togglepause()
         {
             if (Time.timeScale == 0f)
             {
@@ -86,12 +93,12 @@ namespace FG
                 Time.timeScale = 0f;
                 return (true);
             }
-        }
+        }*/
 
-        private void OnMenu(InputValue input)
+        /*private void OnMenu(InputValue input)
         {
             paused = Togglepause();
-        }
+        }*/
 
         private void OnDash(InputValue value)
         {
@@ -193,7 +200,7 @@ namespace FG
             animController = GetComponentInChildren<PlayerAnimationController>();
         }
 
-        void OnGUI()
+        /*void OnGUI()
         {
             if (paused)
             {
@@ -201,6 +208,6 @@ namespace FG
                 if (GUILayout.Button("Click me to quit"))
                     Application.Quit();
             }
-        }
+        }*/
     }
 }
