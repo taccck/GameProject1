@@ -6,40 +6,100 @@ namespace FG
 {
     public class Clickzone : MonoBehaviour
     {
-        [Tooltip("% / operation")]
+        [Tooltip("% / interval")]
         [SerializeField] private float percentage;
         [Tooltip("Padding for red bar, in width/2")]
         [SerializeField] private int padding = 1;
+        [SerializeField] private float interval = 1f;
+        [SerializeField] private float cooldown = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
         [HideInInspector] private Transform red;
         [HideInInspector] private bool goright = true;
+        [HideInInspector] private bool started = false;
+        [HideInInspector] private bool done = false;
+        [HideInInspector] private Vector2 input = Vector2.zero;
+        [HideInInspector] private bool cd = false;
 
-        public void Addprogress()
+        public bool Isfilled()
         {
-            if (goright)
-            {
-                progress.localPosition += new Vector3(percentage, red.localPosition.y);
+            return done;
+        }
 
-                if (progress.localPosition.x >= bar.localScale.x / 2f)
-                    goright = false;
+        public bool Startbar()
+        {
+            if (!started)
+            {
+                started = true;
+                StartCoroutine("Addprogress");
+                return true;
             }
-            else if (!goright)
-            {
-                progress.localPosition -= new Vector3(percentage, red.localPosition.y);
+            return false;
+        }
 
-                if (progress.localPosition.x <= -bar.localScale.x / 2f)
-                    goright = true;
+        public void Interact(Vector2 input)
+        {
+            if (!cd)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
+                if (hit.collider != null && hit.collider.CompareTag("Progbar"))
+                    done = true;
+                StartCoroutine("Cooldown");
             }
         }
 
-        public bool Isinzone()
+        public Vector2 Checkinput()
         {
-            RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
-            if(hit.collider != null && hit.collider.CompareTag("Progbar"))
-                return true;
-            return false;
+            if (input == Vector2.zero)
+                Generateinput();
+            return input;
+        }
+
+        private IEnumerator Cooldown()
+        {
+            cd = true;
+            yield return new WaitForSeconds(cooldown);
+            cd = false;
+        }
+
+        private void Generateinput()
+        {
+            int dir = Random.Range(0, 4);
+            if (dir == 0)
+                input.x = 1;
+            else if (dir == 1)
+                input.x = -1;
+            else if (dir == 2)
+                input.y = 1;
+            else if (dir == 3)
+                input.y = -1;
+        }
+
+        private IEnumerator Addprogress()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(interval);
+
+                if (goright)
+                {
+                    progress.localPosition += new Vector3(percentage, red.localPosition.y);
+
+                    if (progress.localPosition.x >= bar.localScale.x / 2f)
+                        goright = false;
+                }
+                else if (!goright)
+                {
+                    progress.localPosition -= new Vector3(percentage, red.localPosition.y);
+
+                    if (progress.localPosition.x <= -bar.localScale.x / 2f)
+                        goright = true;
+                }
+                
+                if (done)
+                    break;
+            }
         }
 
         private void Redloc()

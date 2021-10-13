@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FG
@@ -15,9 +13,12 @@ namespace FG
 
         private void FixedUpdate()
         {
-            float currY = Mathf.Lerp(camera.transform.position.y, playerpos.position.y, reverseSmooth);
+            if (playerpos != null)
+            {
+                float currY = Mathf.Lerp(camera.transform.position.y, playerpos.position.y, reverseSmooth);
 
-            camera.transform.position = new Vector3(camera.transform.position.x, currY, camera.transform.position.z);
+                camera.transform.position = new Vector3(camera.transform.position.x, currY, camera.transform.position.z);
+            }
         }
 
         private void Awake()

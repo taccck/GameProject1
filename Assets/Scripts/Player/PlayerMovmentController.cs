@@ -45,13 +45,14 @@ namespace FG
         public void Knockback(bool right, bool up)
         {
             bonking = true;
-            AudioManager.Curr.Play("Bonk");
             Vector2 knockbackDir = Vector2.zero;
             knockbackDir.y = up ? 1f : -1f;
             knockbackDir.x = right ? 1f : -1f;
             knockbackDir = knockbackDir.normalized * knockbackSpeed;
-
             body.velocity = knockbackDir;
+            transform.position += new Vector3(0, .2f, 0); //move so not on ground when knockbacking
+
+            AudioManager.Curr.Play("Bonk");
         }
 
         public void LavaKnockback()
@@ -80,25 +81,6 @@ namespace FG
             if (hit.collider != null && hit.collider.CompareTag("Platform"))
                 platformpassing.Fall();
         }
-
-        /*private bool Togglepause()
-        {
-            if (Time.timeScale == 0f)
-            {
-                Time.timeScale = 1f;
-                return (false);
-            }
-            else
-            {
-                Time.timeScale = 0f;
-                return (true);
-            }
-        }*/
-
-        /*private void OnMenu(InputValue input)
-        {
-            paused = Togglepause();
-        }*/
 
         private void OnDash(InputValue value)
         {
@@ -187,6 +169,8 @@ namespace FG
                 animController.ChangeAnimationState(animController.Dash);
             else if (jumping)
                 animController.ChangeAnimationState(animController.Jump);
+            else if (walking && onGround)
+                animController.ChangeAnimationState(animController.Walk);
             else if (onGround)
                 animController.ChangeAnimationState(animController.Idle);
         }
@@ -199,15 +183,5 @@ namespace FG
             playerCollider = GetComponent<CapsuleCollider2D>();
             animController = GetComponentInChildren<PlayerAnimationController>();
         }
-
-        /*void OnGUI()
-        {
-            if (paused)
-            {
-                GUILayout.Label("Game is paused! Hit ESC to unpause");
-                if (GUILayout.Button("Click me to quit"))
-                    Application.Quit();
-            }
-        }*/
     }
 }

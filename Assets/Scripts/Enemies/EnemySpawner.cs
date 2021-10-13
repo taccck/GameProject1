@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnDelay = 5f;
     [SerializeField] private float spawnDistance = 1f;
 
+    [HideInInspector] private bool started = false;
+
     private IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < 1000; i++)
@@ -17,14 +19,24 @@ public class EnemySpawner : MonoBehaviour
             float randomDistance = Random.Range(-spawnDistance, spawnDistance);
             yield return new WaitForSeconds(spawnDelay);
             GameObject newEnemy = Instantiate(enemyToSpawn);
-            newEnemy.GetComponent<Fallingenemy>().player = player;
+            if (player != null)
+                newEnemy.GetComponent<Fallingenemy>().player = player;
+            else
+                newEnemy.GetComponent<Rigidbody2D>().gravityScale = 1f;
             newEnemy.transform.position = new Vector2(transform.position.x + randomDistance, transform.position.y);
         }
     }
 
-    private void Start()
+    public void Startme()
     {
-        StartCoroutine(SpawnEnemy());
+        if(!started)
+            StartCoroutine(SpawnEnemy());
+    }
+
+    public void Stopme()
+    {
+        if(started)
+            StopCoroutine(SpawnEnemy());
     }
 
     private void OnDrawGizmos()
