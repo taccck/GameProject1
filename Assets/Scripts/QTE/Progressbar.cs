@@ -6,8 +6,9 @@ namespace FG
 {
     public class Progressbar : MonoBehaviour
     {
-        [Tooltip("% / interval")]
-        [SerializeField] private float percentage;
+        [Tooltip("% / interval")] [SerializeField]
+        private float percentage;
+
         [SerializeField] private float interval = 1f;
 
         [HideInInspector] private Transform progress;
@@ -24,42 +25,46 @@ namespace FG
 
         public bool Startbar()
         {
-            if(!started)
+            if (!started)
             {
                 started = true;
-                StartCoroutine("Addprogress");
                 return true;
             }
+
             return false;
         }
 
         public void Interact()
         {
-            return;
+            Addprogress();
         }
 
         public Vector2 Checkinput()
         {
+            if (input == Vector2.zero)
+                Generateinput();
             return input;
         }
 
         private void Generateinput()
         {
-            return;
+            int dir = Random.Range(0, 4);
+            if (dir == 0)
+                input.x = 1;
+            else if (dir == 1)
+                input.x = -1;
+            else if (dir == 2)
+                input.y = 1;
+            else if (dir == 3)
+                input.y = -1;
         }
 
-        private IEnumerator Addprogress()
+        private void Addprogress()
         {
-            while (true)
-            {
-                yield return new WaitForSeconds(interval);
-
-                progress.localScale += new Vector3(percentage, 0);
-                progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f, progress.localPosition.y);
-                
-                if (Isfilled())
-                    break;
-            }
+            progress.localScale += new Vector3(percentage, 0);
+            if (progress.localScale.x > 5) progress.localScale = new Vector2(5f, 1f);
+            progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f,
+                progress.localPosition.y);
         }
 
         private void Awake()

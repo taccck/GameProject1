@@ -243,7 +243,8 @@ MonoBehaviour:
   operations: 5
   padding: 1
   gap: 1
-  cooldown: 1
+  cooldown: 0
+  interval: 1
 --- !u!1 &7321324116472627558
 GameObject:
   m_ObjectHideFlags: 0
