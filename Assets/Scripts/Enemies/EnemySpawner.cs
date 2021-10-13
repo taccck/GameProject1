@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnDelay = 5f;
     [SerializeField] private float spawnDistance = 1f;
 
+    [HideInInspector] private bool active = false;
+
     private IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < 1000; i++)
@@ -25,9 +27,12 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void Toggleme()
     {
-        StartCoroutine(SpawnEnemy());
+        if (!active)
+            StartCoroutine(SpawnEnemy());
+        else
+            StopCoroutine(SpawnEnemy());
     }
 
     private void OnDrawGizmos()
