@@ -16,6 +16,7 @@ public class Recipes : MonoBehaviour
         public string name;
         public Item[] ingredients;
         public Sprite sprite;
+        public GameObject[] cookingSections;
     }
 
     public Recipe GetRecipe(Item[] items)

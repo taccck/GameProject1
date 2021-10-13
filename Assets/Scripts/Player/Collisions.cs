@@ -6,6 +6,7 @@ namespace FG
 {
     public class Collisions : MonoBehaviour
     {
+        [SerializeField] private bool invincible;
         [SerializeField] private PlayerInventory inventory;
         [SerializeField] private float invultime = 1f;
 
@@ -36,7 +37,7 @@ namespace FG
             inventory.CanPickup = true;
             spriteRenderer.color = Color.white;
         }
-        
+
         private IEnumerator NoPickup()
         {
             inventory.CanPickup = false;
@@ -63,14 +64,15 @@ namespace FG
             if (!inventory.Drop()) Death();
             movementController.LavaKnockback();
             movementController.bonking = false;
-            
+
             if (noPickupRoutine != null) StopCoroutine(noPickupRoutine);
             noPickupRoutine = StartCoroutine(NoPickup());
         }
 
         public void Death()
         {
-            StartCoroutine(DeathAnim());
+            if (!invincible)
+                StartCoroutine(DeathAnim());
         }
 
         private IEnumerator DeathAnim()

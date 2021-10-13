@@ -6,7 +6,7 @@ namespace FG
 {
     public class Fallingenemy : MonoBehaviour
     {
-        [SerializeField] private Transform player;
+        public Transform player;
         [SerializeField] private Rigidbody2D body;
         [SerializeField] private float gravity = 1f;
         [SerializeField] private float angle = 45f;
