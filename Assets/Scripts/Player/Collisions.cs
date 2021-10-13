@@ -103,6 +103,20 @@ namespace FG
             {
                 DangerCollision(collision.transform.position);
             }
+            else if(collision.name == "Checkpoint Stage 4")
+            {
+                foreach (Transform spawner in Camera.main.transform)
+                {
+                    spawner.GetComponent<EnemySpawner>().Startme();
+                }
+            }
+            else if(collision.name == "Checkpoint Final")
+            {
+                foreach (Transform spawner in Camera.main.transform)
+                {
+                    spawner.GetComponent<EnemySpawner>().Stopme();
+                }
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
