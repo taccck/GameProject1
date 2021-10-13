@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using FG;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CookingController : MonoBehaviour
 {
-    [HideInInspector] public StartCooking StartCooking;
+    [HideInInspector] public StartCooking startCooking;
 
     [Header("Event"), SerializeField] private float time;
     [SerializeField] private Progressbar progBar;
@@ -93,7 +92,7 @@ public class CookingController : MonoBehaviour
                 progZone.Interact();
                 break;
             case EventType.Click:
-                progClick.Interact(Vector2.zero);
+                progClick.Interact();
                 break;
         }
     }
@@ -132,7 +131,7 @@ public class CookingController : MonoBehaviour
 
         done = true;
         yield return new WaitForSeconds(timeBeforeEnd);
-        StartCooking.Next();
+        startCooking.Next();
         Destroy(gameObject);
     }
 

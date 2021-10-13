@@ -34,7 +34,7 @@ public class StartCooking : MonoBehaviour
 
         CookingController cntl = Instantiate(recipe.cookingSections[currIndex]).GetComponent<CookingController>();
         cntl.transform.position = (Vector2) Camera.main.transform.position;
-        cntl.StartCooking = this;
+        cntl.startCooking = this;
         currIndex++;
     }
 }
