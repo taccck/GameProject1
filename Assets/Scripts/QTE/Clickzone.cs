@@ -6,40 +6,87 @@ namespace FG
 {
     public class Clickzone : MonoBehaviour
     {
-        [Tooltip("% / operation")]
+        [Tooltip("% / interval")]
         [SerializeField] private float percentage;
         [Tooltip("Padding for red bar, in width/2")]
         [SerializeField] private int padding = 1;
+        [SerializeField] private float interval = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
         [HideInInspector] private Transform red;
         [HideInInspector] private bool goright = true;
+        [HideInInspector] private bool started = false;
+        [HideInInspector] private bool done = false;
+        [HideInInspector] private Vector2 input = Vector2.zero;
 
-        public void Addprogress()
+        public bool Isfilled()
         {
-            if (goright)
-            {
-                progress.localPosition += new Vector3(percentage, red.localPosition.y);
-
-                if (progress.localPosition.x >= bar.localScale.x / 2f)
-                    goright = false;
-            }
-            else if (!goright)
-            {
-                progress.localPosition -= new Vector3(percentage, red.localPosition.y);
-
-                if (progress.localPosition.x <= -bar.localScale.x / 2f)
-                    goright = true;
-            }
+            return done;
         }
 
-        public bool Isinzone()
+        public bool Startbar()
+        {
+            if (!started)
+            {
+                started = true;
+                StartCoroutine("Addprogress");
+                return true;
+            }
+            return false;
+        }
+
+        public void Interact(Vector2 input)
         {
             RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
-            if(hit.collider != null && hit.collider.CompareTag("Progbar"))
-                return true;
-            return false;
+            if (hit.collider != null && hit.collider.CompareTag("Progbar"))
+                done = true;
+        }
+
+        public Vector2 Checkinput()
+        {
+            if (input == Vector2.zero)
+                Generateinput();
+            return input;
+        }
+
+        private void Generateinput()
+        {
+            int dir = Random.Range(0, 4);
+            if (dir == 0)
+                input.x = 1;
+            else if (dir == 1)
+                input.x = -1;
+            else if (dir == 2)
+                input.y = 1;
+            else if (dir == 3)
+                input.y = -1;
+        }
+
+        private IEnumerator Addprogress()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(interval);
+
+                if (goright)
+                {
+                    progress.localPosition += new Vector3(percentage, red.localPosition.y);
+
+                    if (progress.localPosition.x >= bar.localScale.x / 2f)
+                        goright = false;
+                }
+                else if (!goright)
+                {
+                    progress.localPosition -= new Vector3(percentage, red.localPosition.y);
+
+                    if (progress.localPosition.x <= -bar.localScale.x / 2f)
+                        goright = true;
+                }
+                
+                if (done)
+                    break;
+            }
         }
 
         private void Redloc()

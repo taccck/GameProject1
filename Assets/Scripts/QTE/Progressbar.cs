@@ -6,11 +6,14 @@ namespace FG
 {
     public class Progressbar : MonoBehaviour
     {
-        [Tooltip("% / operation")]
+        [Tooltip("% / interval")]
         [SerializeField] private float percentage;
+        [SerializeField] private float interval = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
+        [HideInInspector] private bool started = false;
+        [HideInInspector] private Vector2 input = Vector2.zero;
 
         public bool Isfilled()
         {
@@ -19,10 +22,54 @@ namespace FG
             return false;
         }
 
-        public void Addprogress()
+        public bool Startbar()
         {
-            progress.localScale += new Vector3(percentage, 0);
-            progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f, progress.localPosition.y);
+            if(!started)
+            {
+                started = true;
+                StartCoroutine("Addprogress");
+                return true;
+            }
+            return false;
+        }
+
+        public void Interact()
+        {
+            return;
+        }
+
+        public Vector2 Checkinput()
+        {
+            if (input == Vector2.zero)
+                Generateinput();
+            return input;
+        }
+
+        private void Generateinput()
+        {
+            int dir = Random.Range(0, 4);
+            if (dir == 0)
+                input.x = 1;
+            else if (dir == 1)
+                input.x = -1;
+            else if (dir == 2)
+                input.y = 1;
+            else if (dir == 3)
+                input.y = -1;
+        }
+
+        private IEnumerator Addprogress()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(interval);
+
+                progress.localScale += new Vector3(percentage, 0);
+                progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f, progress.localPosition.y);
+                
+                if (Isfilled())
+                    break;
+            }
         }
 
         private void Awake()

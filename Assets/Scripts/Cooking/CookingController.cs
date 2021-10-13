@@ -37,7 +37,7 @@ public class CookingController : MonoBehaviour
         }
         else if (progCircle != null)
         {
-            Outcome(progCircle.Isfilled() > 1f);
+            Outcome(progCircle.Isfilled());
         }
         else if (progZone != null)
         {
@@ -45,7 +45,7 @@ public class CookingController : MonoBehaviour
         }
         else if (progClick != null)
         {
-            Outcome(progClick.Isinzone());
+            Outcome(progClick.Isfilled());
         }
     }
 
