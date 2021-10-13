@@ -52,17 +52,19 @@ public class ItemBehavior : MonoBehaviour
 
     private float desync;
     private float startY;
+    private float startTime;
 
     private void Bobble()
     {
         if (desync == 0)
         {
+            startTime = Time.time;
             body.velocity = Vector2.zero;
             desync = Random.Range(0f, Mathf.PI * 2f);
-            startY = transform.position.y - Mathf.Sin(Time.time * Mathf.PI + desync) / 5;
+            startY = transform.position.y - (Mathf.Sin(((Time.time - startTime) - .5f) * Mathf.PI) * .2f + .2f);
         }
 
-        float newYPos = Mathf.Sin(Time.time * Mathf.PI + desync) / 5;
+        float newYPos = (Mathf.Sin(((Time.time - startTime) - .5f) * Mathf.PI) * .2f + .2f);
         transform.position = new Vector3(transform.position.x, startY + newYPos, transform.position.z);
     }
 
