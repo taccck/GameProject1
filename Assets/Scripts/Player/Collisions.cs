@@ -71,13 +71,14 @@ namespace FG
 
             if (noPickupRoutine != null) StopCoroutine(noPickupRoutine);
             noPickupRoutine = StartCoroutine(NoPickup());
-            
+
             AudioManager.Curr.Play("LavaScream");
         }
 
         public void Death()
         {
-            StopCoroutine(invulRoutine);
+            if (invulRoutine != null) StopCoroutine(invulRoutine);
+            
             if (!invincible)
                 StartCoroutine(DeathAnim());
         }
