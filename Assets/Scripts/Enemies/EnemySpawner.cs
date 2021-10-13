@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnDelay = 5f;
     [SerializeField] private float spawnDistance = 1f;
 
+    [HideInInspector] private bool started = false;
+
     private IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < 1000; i++)
@@ -27,12 +29,14 @@ public class EnemySpawner : MonoBehaviour
 
     public void Startme()
     {
-        StartCoroutine(SpawnEnemy());
+        if(!started)
+            StartCoroutine(SpawnEnemy());
     }
 
     public void Stopme()
     {
-        StopCoroutine(SpawnEnemy());
+        if(started)
+            StopCoroutine(SpawnEnemy());
     }
 
     private void OnDrawGizmos()
