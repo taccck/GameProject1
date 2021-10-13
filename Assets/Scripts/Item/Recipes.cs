@@ -7,6 +7,7 @@ public class Recipes : MonoBehaviour
     [NonSerialized] public static Recipes current;
 
     [SerializeField] private Recipe[] recipes;
+    [SerializeField] private Sprite failedCooking;
 
     private Recipe failedRecipe;
 
@@ -86,8 +87,8 @@ public class Recipes : MonoBehaviour
         failedRecipe = new Recipe()
         {
             ingredients = null,
-            name = "WTF have you done!!",
-            sprite = null
+            name = "WTF have you done!",
+            sprite = failedCooking
         };
 
         Sort();

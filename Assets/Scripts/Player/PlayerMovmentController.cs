@@ -6,11 +6,8 @@ namespace FG
 {
     public class PlayerMovmentController : MonoBehaviour
     {
-        [NonSerialized] private bool walking;
-        [NonSerialized] private bool jumping;
         [NonSerialized] public bool bonking;
-        [NonSerialized] private bool dashing;
-
+        
         [SerializeField, Tooltip("m/s"), Header("Walking")]
         private float walkSpeed = 5f;
 
@@ -34,6 +31,9 @@ namespace FG
         private int walkDirection;
         private float currJumpTime;
         private bool onGround;
+        private bool walking;
+        private bool jumping;
+        private bool dashing;
 
         private const float SMALL_OFFSET = .1f;
 
@@ -93,11 +93,11 @@ namespace FG
 
         private void FixedUpdate()
         {
-            OnGround();
-            Walk();
-            Jump();
-            Dash();
-            Animate();
+                OnGround();
+                Walk();
+                Jump();
+                Dash();
+                Animate();
         }
 
         private void OnGround()

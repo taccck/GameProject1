@@ -6,8 +6,9 @@ namespace FG
 {
     public class Progresscircle : MonoBehaviour
     {
-        [Tooltip("% / interval")]
-        [SerializeField] private float percentage;
+        [Tooltip("% / interval")] [SerializeField]
+        private float percentage;
+
         [SerializeField] private float interval = 1f;
         [SerializeField] private float cooldown = 1f;
 
@@ -35,15 +36,13 @@ namespace FG
             if (!cd)
             {
                 Addprogress();
-                Generateinput();
                 StartCoroutine("Cooldown");
             }
         }
 
         public Vector2 Checkinput()
         {
-            if (input == Vector2.zero)
-                Generateinput();
+            Generateinput();
             return input;
         }
 
@@ -72,24 +71,27 @@ namespace FG
             }
             else
             {
-                if (Mathf.Approximately(input.x, 1) )
+                if (Mathf.Approximately(input.x, 1))
                 {
                     input.x = 0;
                     input.y = -1;
                     return;
                 }
-                if (Mathf.Approximately( input.y,-1))
+
+                if (Mathf.Approximately(input.y, -1))
                 {
                     input.x = -1;
                     input.y = 0;
                     return;
                 }
+
                 if (Mathf.Approximately(input.x, -1))
                 {
                     input.x = 0;
                     input.y = 1;
                     return;
                 }
+
                 if (Mathf.Approximately(input.y, 1))
                 {
                     input.x = 1;

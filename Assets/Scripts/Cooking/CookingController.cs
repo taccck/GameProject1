@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CookingController : MonoBehaviour
 {
+    [HideInInspector] public StartCooking StartCooking;
+    
     [Header("Event"), SerializeField] private float time;
     [SerializeField] private Progressbar progBar;
     [SerializeField] private Progresscircle progCircle;
@@ -16,6 +18,7 @@ public class CookingController : MonoBehaviour
     [SerializeField] private SpriteRenderer toSwap;
     [SerializeField] private SpriteRenderer toHide;
     [SerializeField] private Animator toStop;
+    [SerializeField] private float timeBeforeEnd = 2f;
 
     private enum EventType
     {
@@ -45,7 +48,8 @@ public class CookingController : MonoBehaviour
         bool correctX = Mathf.Approximately(correctInput.x, input.x);
         bool correctY = Mathf.Approximately(correctInput.y, input.y);
         bool correct = correctX && correctY;
-        NewCorrectInput();
+        if (correct)
+            NewCorrectInput();
 
         return correct;
     }
@@ -121,6 +125,10 @@ public class CookingController : MonoBehaviour
                 Outcome(progClick.Isfilled());
                 break;
         }
+        
+        yield return new WaitForSeconds(timeBeforeEnd);
+        StartCooking.Next();
+        Destroy(gameObject);
     }
 
     private void Start()

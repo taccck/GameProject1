@@ -206,3 +206,4 @@ MonoBehaviour:
     - {fileID: 5010358954581118785, guid: fbb1291e32a63cc45876201d570d7229, type: 3}
     - {fileID: 1920482507425871502, guid: bb4c6d899bfe2b549a0f9d6080169d52, type: 3}
     - {fileID: 6765379982742747805, guid: b39e5c81c5818124f8b8aef0602a2f21, type: 3}
+  failedCooking: {fileID: 21300000, guid: 7fb106ce02b62b9468c50215b1621b9b, type: 3}

@@ -28,7 +28,6 @@ public class PlayerInventory : MonoBehaviour
 
             inventory[i] = itemToAdd;
             UpdateUI();
-            print(Recipes.current.GetRecipe(inventory).name);
             return true;
         }
 
