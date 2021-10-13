@@ -11,6 +11,7 @@ namespace FG
         [Tooltip("Padding for red bar, in width/2")]
         [SerializeField] private int padding = 1;
         [SerializeField] private float interval = 1f;
+        [SerializeField] private float cooldown = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
@@ -19,6 +20,7 @@ namespace FG
         [HideInInspector] private bool started = false;
         [HideInInspector] private bool done = false;
         [HideInInspector] private Vector2 input = Vector2.zero;
+        [HideInInspector] private bool cd = false;
 
         public bool Isfilled()
         {
@@ -38,9 +40,13 @@ namespace FG
 
         public void Interact(Vector2 input)
         {
-            RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
-            if (hit.collider != null && hit.collider.CompareTag("Progbar"))
-                done = true;
+            if (!cd)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
+                if (hit.collider != null && hit.collider.CompareTag("Progbar"))
+                    done = true;
+                StartCoroutine("Cooldown");
+            }
         }
 
         public Vector2 Checkinput()
@@ -48,6 +54,13 @@ namespace FG
             if (input == Vector2.zero)
                 Generateinput();
             return input;
+        }
+
+        private IEnumerator Cooldown()
+        {
+            cd = true;
+            yield return new WaitForSeconds(cooldown);
+            cd = false;
         }
 
         private void Generateinput()

@@ -9,12 +9,14 @@ namespace FG
         [Tooltip("% / interval")]
         [SerializeField] private float percentage;
         [SerializeField] private float interval = 1f;
+        [SerializeField] private float cooldown = 1f;
 
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform circle;
         [HideInInspector] private bool swapped = false;
         [HideInInspector] private bool started = false;
         [HideInInspector] private Vector2 input = Vector2.zero;
+        [HideInInspector] private bool cd = false;
 
         public bool Isfilled()
         {
@@ -25,13 +27,17 @@ namespace FG
 
         public bool Startbar()
         {
-            return false;
+            return true;
         }
 
         public void Interact()
         {
-            Addprogress();
-            Generateinput();
+            if (!cd)
+            {
+                Addprogress();
+                Generateinput();
+                StartCoroutine("Cooldown");
+            }
         }
 
         public Vector2 Checkinput()
@@ -39,6 +45,13 @@ namespace FG
             if (input == Vector2.zero)
                 Generateinput();
             return input;
+        }
+
+        private IEnumerator Cooldown()
+        {
+            cd = true;
+            yield return new WaitForSeconds(cooldown);
+            cd = false;
         }
 
         private void Generateinput()
