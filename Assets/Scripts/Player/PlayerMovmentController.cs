@@ -45,13 +45,14 @@ namespace FG
         public void Knockback(bool right, bool up)
         {
             bonking = true;
-            AudioManager.Curr.Play("Bonk");
             Vector2 knockbackDir = Vector2.zero;
             knockbackDir.y = up ? 1f : -1f;
             knockbackDir.x = right ? 1f : -1f;
             knockbackDir = knockbackDir.normalized * knockbackSpeed;
-
             body.velocity = knockbackDir;
+            transform.position += new Vector3(0, .2f, 0); //move so not on ground when knockbacking
+
+            AudioManager.Curr.Play("Bonk");
         }
 
         public void LavaKnockback()
@@ -168,7 +169,7 @@ namespace FG
                 animController.ChangeAnimationState(animController.Dash);
             else if (jumping)
                 animController.ChangeAnimationState(animController.Jump);
-            else if (walking)
+            else if (walking && onGround)
                 animController.ChangeAnimationState(animController.Walk);
             else if (onGround)
                 animController.ChangeAnimationState(animController.Idle);
