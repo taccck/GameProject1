@@ -25,7 +25,7 @@ namespace FG
 
         public bool Startbar()
         {
-            return false;
+            return true;
         }
 
         public void Interact()

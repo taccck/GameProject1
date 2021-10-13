@@ -32,29 +32,22 @@ namespace FG
 
         public bool Isfilled()
         {
-            if (opsdone == operations)
+            if (Isinzone())
                 return true;
             return false;
         }
 
         public bool Startbar()
         {
-            if (!started)
-            {
-                started = true;
-                StartCoroutine("Addprogress");
-                return true;
-            }
-            return false;
+            return true;
         }
 
         public void Interact()
         {
-            if (Isinzone() && !cd && !Isfilled())
+            if (!cd)
             {
-                opsdone++;
-                cd = true;
-                cooldownroutine = StartCoroutine("Cooldown");
+                progress.localPosition += new Vector3(percentage, 0);
+                StartCoroutine("Cooldown");
             }
         }
 
@@ -84,23 +77,7 @@ namespace FG
             {
                 yield return new WaitForSeconds(interval);
 
-                if (goright)
-                {
-                    progress.localPosition += new Vector3(percentage, red.localPosition.y);
-
-                    if (progress.localPosition.x + progress.localScale.x / 2 >= bar.localScale.x / 2f)
-                        goright = false;
-                }
-                else if (!goright)
-                {
-                    progress.localPosition -= new Vector3(percentage, red.localPosition.y);
-
-                    if (progress.localPosition.x - progress.localScale.x / 2 <= -bar.localScale.x / 2f)
-                        goright = true;
-                }
-
-                if (Isfilled())
-                    break;
+                progress.localPosition -= new Vector3(percentage, 0);
             }
         }
 
@@ -113,9 +90,9 @@ namespace FG
 
         private IEnumerator Cooldown()
         {
+            cd = true;
             yield return new WaitForSeconds(cooldown);
             cd = false;
-
         }
 
         private void Redloc()
@@ -137,6 +114,8 @@ namespace FG
             percentageloss *= bar.localScale.x / 100f;
 
             Redloc();
+
+            StartCoroutine("Addprogress");
         }
     }
 }
