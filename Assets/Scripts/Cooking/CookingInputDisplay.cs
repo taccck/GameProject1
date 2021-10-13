@@ -10,11 +10,11 @@ public class CookingInputDisplay : MonoBehaviour
    {
       if (Mathf.Approximately(button.y, 1f))
          spriteRenderer.sprite = wasdSprites[0];
-      else if(Mathf.Approximately(button.x, 1f))
+      else if(Mathf.Approximately(button.x, -1f))
          spriteRenderer.sprite = wasdSprites[1];
       else if(Mathf.Approximately(button.y, -1f))
          spriteRenderer.sprite = wasdSprites[2];
-      else if(Mathf.Approximately(button.x, -1f))
+      else if(Mathf.Approximately(button.x, 1f))
          spriteRenderer.sprite = wasdSprites[3];
    }
 

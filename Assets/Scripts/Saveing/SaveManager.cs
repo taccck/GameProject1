@@ -19,7 +19,7 @@ public class SaveManager : MonoBehaviour
         saveFile.lavaHeight = 0;
     }
 
-    public void Save()
+    public void Save(Vector2 position)
     {
         if (hotSauce == null)
         {
@@ -28,7 +28,7 @@ public class SaveManager : MonoBehaviour
         }
 
         saveFile.first = false;
-        saveFile.playerPos = transform.position;
+        saveFile.playerPos = position;
         saveFile.items = inventory.inventory.ToArray();
         saveFile.lavaHeight = hotSauce.position.y;
     }
@@ -38,12 +38,6 @@ public class SaveManager : MonoBehaviour
         if (hotSauce == null)
         {
             Debug.LogError("hot sauce reference is not set in save manager on the player");
-            return;
-        }
-
-        if (saveFile.first)
-        {
-            Save();
             return;
         }
 

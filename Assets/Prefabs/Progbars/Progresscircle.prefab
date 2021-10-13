@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   percentage: 10
+  interval: 1
+  cooldown: 0
 --- !u!1 &32546210769859889
 GameObject:
   m_ObjectHideFlags: 0

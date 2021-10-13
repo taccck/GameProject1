@@ -237,10 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978160ed91ccc834f82075e3f780913f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentage: 10
+  percentage: 3
   padding: 1
-  interval: 1
-  cooldown: 1
+  interval: 0.1
+  cooldown: 0
 --- !u!1 &6779813280309325247
 GameObject:
   m_ObjectHideFlags: 0

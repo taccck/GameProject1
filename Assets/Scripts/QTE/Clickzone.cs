@@ -6,10 +6,12 @@ namespace FG
 {
     public class Clickzone : MonoBehaviour
     {
-        [Tooltip("% / interval")]
-        [SerializeField] private float percentage;
-        [Tooltip("Padding for red bar, in width/2")]
-        [SerializeField] private int padding = 1;
+        [Tooltip("% / interval")] [SerializeField]
+        private float percentage;
+
+        [Tooltip("Padding for red bar, in width/2")] [SerializeField]
+        private int padding = 1;
+
         [SerializeField] private float interval = 1f;
         [SerializeField] private float cooldown = 1f;
 
@@ -21,6 +23,7 @@ namespace FG
         [HideInInspector] private bool done = false;
         [HideInInspector] private Vector2 input = Vector2.zero;
         [HideInInspector] private bool cd = false;
+        private Coroutine progressRoutine;
 
         public bool Isfilled()
         {
@@ -32,9 +35,10 @@ namespace FG
             if (!started)
             {
                 started = true;
-                StartCoroutine("Addprogress");
+                progressRoutine = StartCoroutine("Addprogress");
                 return true;
             }
+
             return false;
         }
 
@@ -44,7 +48,10 @@ namespace FG
             {
                 RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
                 if (hit.collider != null && hit.collider.CompareTag("Progbar"))
+                {
                     done = true;
+                    StopCoroutine(progressRoutine);
+                }
                 StartCoroutine("Cooldown");
             }
         }
@@ -96,7 +103,7 @@ namespace FG
                     if (progress.localPosition.x <= -bar.localScale.x / 2f)
                         goright = true;
                 }
-                
+
                 if (done)
                     break;
             }

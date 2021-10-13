@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (reached) return;
         
-        SaveManager.Curr.Save();
+        SaveManager.Curr.Save(transform.position);
         reached = true;
     }
 

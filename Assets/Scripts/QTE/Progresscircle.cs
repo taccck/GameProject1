@@ -68,25 +68,29 @@ namespace FG
                     input.y = 1;
                 else if (dir == 3)
                     input.y = -1;
+                Generateinput();
             }
             else
             {
-                if (input.x == 1)
+                if (Mathf.Approximately(input.x, 1) )
                 {
                     input.x = 0;
                     input.y = -1;
+                    return;
                 }
-                else if (input.y == -1)
+                if (Mathf.Approximately( input.y,-1))
                 {
                     input.x = -1;
                     input.y = 0;
+                    return;
                 }
-                else if (input.x == -1)
+                if (Mathf.Approximately(input.x, -1))
                 {
                     input.x = 0;
                     input.y = 1;
+                    return;
                 }
-                else if (input.y == 1)
+                if (Mathf.Approximately(input.y, 1))
                 {
                     input.x = 1;
                     input.y = 0;
