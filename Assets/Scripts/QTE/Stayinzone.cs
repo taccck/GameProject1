@@ -44,7 +44,7 @@ namespace FG
 
         public void Interact()
         {
-            if (!cd)
+            if (!cd && progress.localPosition.x < bar.localScale.x / 2f)
             {
                 progress.localPosition += new Vector3(percentage, 0);
                 StartCoroutine("Cooldown");
@@ -77,7 +77,8 @@ namespace FG
             {
                 yield return new WaitForSeconds(interval);
 
-                progress.localPosition -= new Vector3(percentage, 0);
+                if(progress.localPosition.x != -bar.localScale.x / 2f)
+                    progress.localPosition -= new Vector3(percentage, 0);
             }
         }
 
@@ -112,6 +113,8 @@ namespace FG
 
             percentage *= bar.localScale.x / 100f;
             percentageloss *= bar.localScale.x / 100f;
+
+            progress.localPosition = new Vector3(-bar.localScale.x / 2f, 0);
 
             Redloc();
 

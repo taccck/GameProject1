@@ -40,22 +40,12 @@ namespace FG
 
         public Vector2 Checkinput()
         {
-            if (input == Vector2.zero)
-                Generateinput();
             return input;
         }
 
         private void Generateinput()
         {
-            int dir = Random.Range(0, 4);
-            if (dir == 0)
-                input.x = 1;
-            else if (dir == 1)
-                input.x = -1;
-            else if (dir == 2)
-                input.y = 1;
-            else if (dir == 3)
-                input.y = -1;
+            return;
         }
 
         private IEnumerator Addprogress()
