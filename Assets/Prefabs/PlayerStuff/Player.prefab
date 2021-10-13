@@ -271,21 +271,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9014689706061596057}
-        m_TargetAssemblyTypeName: SaveManager, Assembly-CSharp
-        m_MethodName: Clear
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: -9012329498697741050}
-        m_TargetAssemblyTypeName: FG.Collisions, Assembly-CSharp
-        m_MethodName: Death
+      - m_Target: {fileID: 660922710781738079}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: ResetLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1046,6 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce888c9675ad3a04db3ab6990cea3d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invincible: 0
   inventory: {fileID: 4536712816542843347}
   invultime: 1.337
 --- !u!114 &2829259771513367442
@@ -1224,7 +1213,7 @@ MonoBehaviour:
   - {x: -0.3552946, y: 0.3188897, z: 0}
   m_ShapePathHash: 1657226783
   m_Mesh: {fileID: 0}
-  m_InstanceId: 91636
+  m_InstanceId: 40424
 --- !u!1 &5168482820757548397
 GameObject:
   m_ObjectHideFlags: 0

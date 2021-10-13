@@ -17,7 +17,10 @@ public class EnemySpawner : MonoBehaviour
             float randomDistance = Random.Range(-spawnDistance, spawnDistance);
             yield return new WaitForSeconds(spawnDelay);
             GameObject newEnemy = Instantiate(enemyToSpawn);
-            newEnemy.GetComponent<Fallingenemy>().player = player;
+            if (player != null)
+                newEnemy.GetComponent<Fallingenemy>().player = player;
+            else
+                newEnemy.GetComponent<Rigidbody2D>().gravityScale = 1f;
             newEnemy.transform.position = new Vector2(transform.position.x + randomDistance, transform.position.y);
         }
     }

@@ -14,7 +14,7 @@ namespace FG
         private PlayerMovmentController movementController;
         private ParticleSystem deathParticles;
         [HideInInspector] private bool invul = false;
-        [HideInInspector] private Coroutine invulroutine;
+        [HideInInspector] private Coroutine invulRoutine;
         private Coroutine noPickupRoutine;
 
         private IEnumerator Invulperiod()
@@ -49,13 +49,17 @@ namespace FG
         {
             if (!invul)
             {
-                if (!inventory.Drop()) Death();
+                if (!inventory.Drop())
+                {
+                    Death();
+                    return;
+                }
 
                 inventory.CanPickup = false;
                 invul = true;
-                invulroutine = StartCoroutine(InvulAnim());
+                invulRoutine = StartCoroutine(InvulAnim());
                 movementController.Knockback(transform.position.x > attackersPos.x,
-                    transform.position.y > attackersPos.y);
+                    transform.position.y + .2f > attackersPos.y);
             }
         }
 
@@ -67,10 +71,13 @@ namespace FG
 
             if (noPickupRoutine != null) StopCoroutine(noPickupRoutine);
             noPickupRoutine = StartCoroutine(NoPickup());
+            
+            AudioManager.Curr.Play("LavaScream");
         }
 
         public void Death()
         {
+            StopCoroutine(invulRoutine);
             if (!invincible)
                 StartCoroutine(DeathAnim());
         }
