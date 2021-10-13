@@ -14,8 +14,6 @@ public class StartCooking : MonoBehaviour
             other.gameObject.SetActive(false); 
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(0).position = (Vector2) Camera.main.transform.position;
-            //hide item ui
-            //timer
 
             if (recipe.ingredients != null)
                 Next();

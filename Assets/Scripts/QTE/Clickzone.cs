@@ -24,6 +24,7 @@ namespace FG
         [HideInInspector] private Vector2 input = Vector2.zero;
         [HideInInspector] private bool cd = false;
         private Coroutine progressRoutine;
+        private LayerMask minigameMask;
 
         public bool Isfilled()
         {
@@ -46,7 +47,7 @@ namespace FG
         {
             if (!cd)
             {
-                RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
+                RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f, minigameMask);
                 if (hit.collider != null && hit.collider.CompareTag("Progbar"))
                 {
                     done = true;
@@ -127,6 +128,7 @@ namespace FG
             Redloc();
 
             goright = Random.Range(0, 1) > 0.5f;
+            minigameMask = LayerMask.NameToLayer("Progbar");
         }
     }
 }

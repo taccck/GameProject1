@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using FG;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 public class CookingController : MonoBehaviour
 {
     [HideInInspector] public StartCooking StartCooking;
-    
+
     [Header("Event"), SerializeField] private float time;
     [SerializeField] private Progressbar progBar;
     [SerializeField] private Progresscircle progCircle;
@@ -31,6 +32,9 @@ public class CookingController : MonoBehaviour
     private EventType eventType;
     private Vector2 correctInput;
     private CookingInputDisplay display;
+    private CookingTimer timer;
+    private float startTime;
+    private bool done;
 
     private void OnQTE(InputValue value)
     {
@@ -125,7 +129,8 @@ public class CookingController : MonoBehaviour
                 Outcome(progClick.Isfilled());
                 break;
         }
-        
+
+        done = true;
         yield return new WaitForSeconds(timeBeforeEnd);
         StartCooking.Next();
         Destroy(gameObject);
@@ -158,8 +163,22 @@ public class CookingController : MonoBehaviour
         NewCorrectInput();
     }
 
+    private void FixedUpdate()
+    {
+        if (!done)
+        {
+            float elapsedTime = Time.time - startTime;
+            timer.SetUI(time - elapsedTime);
+            return;
+        }
+
+        timer.SetUI(0);
+    }
+
     private void Awake()
     {
         display = GetComponentInChildren<CookingInputDisplay>();
+        timer = GetComponentInChildren<CookingTimer>();
+        startTime = Time.time;
     }
 }
