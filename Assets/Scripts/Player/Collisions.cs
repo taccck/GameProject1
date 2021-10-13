@@ -103,11 +103,18 @@ namespace FG
             {
                 DangerCollision(collision.transform.position);
             }
-            else if(collision.name == "Checkpoint Stage 4" || collision.name == "Checkpoint Final")
+            else if(collision.name == "Checkpoint Stage 4")
             {
                 foreach (Transform spawner in Camera.main.transform)
                 {
-                    spawner.GetComponent<EnemySpawner>().Toggleme();
+                    spawner.GetComponent<EnemySpawner>().Startme();
+                }
+            }
+            else if(collision.name == "Checkpoint Final")
+            {
+                foreach (Transform spawner in Camera.main.transform)
+                {
+                    spawner.GetComponent<EnemySpawner>().Stopme();
                 }
             }
         }
