@@ -1,10 +1,10 @@
-using FG;
 using UnityEngine;
 
 public class StartCooking : MonoBehaviour
 {
+    [SerializeField] private GameObject resultScreen;
     private Recipes.Recipe recipe;
-    private int currIndex = 0;
+    private int currIndex;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -18,9 +18,7 @@ public class StartCooking : MonoBehaviour
             if (recipe.ingredients != null)
                 Next();
             else
-            {
-                print(recipe.name);
-            }
+                Result();
         }
     }
 
@@ -28,7 +26,7 @@ public class StartCooking : MonoBehaviour
     {
         if (recipe.cookingSections.Length == currIndex)
         {
-            print(recipe.name);
+            Result();
             return;
         }
 
@@ -36,5 +34,12 @@ public class StartCooking : MonoBehaviour
         cntl.transform.position = (Vector2) Camera.main.transform.position;
         cntl.startCooking = this;
         currIndex++;
+    }
+
+    private void Result()
+    {
+        GameObject result = Instantiate(resultScreen);
+        result.transform.position = (Vector2) Camera.main.transform.position;
+        resultScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = recipe.sprite;
     }
 }
