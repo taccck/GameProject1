@@ -900,6 +900,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1310303840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7396731846706376157, guid: 8795f7b6257c3934b9b664812a202384, type: 3}
+  m_PrefabInstance: {fileID: 563048652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1336061539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1642,6 +1647,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9014689706061596057, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
+      propertyPath: hotSauce
+      value: 
+      objectReference: {fileID: 1310303840}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abd28612f1ee43c439673f251b2487ff, type: 3}
 --- !u!1001 &32546211941460700

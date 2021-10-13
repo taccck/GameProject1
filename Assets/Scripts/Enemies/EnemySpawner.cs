@@ -29,14 +29,20 @@ public class EnemySpawner : MonoBehaviour
 
     public void Startme()
     {
-        if(!started)
+        if (!started)
+        {
             StartCoroutine(SpawnEnemy());
+            started = true;
+        }
     }
 
     public void Stopme()
     {
-        if(started)
+        if (started)
+        {
             StopCoroutine(SpawnEnemy());
+            started = false;
+        }
     }
 
     private void OnDrawGizmos()
