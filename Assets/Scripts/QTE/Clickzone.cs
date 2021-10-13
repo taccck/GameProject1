@@ -17,13 +17,12 @@ namespace FG
         [HideInInspector] private Transform red;
         [HideInInspector] private bool goright = true;
         [HideInInspector] private bool started = false;
+        [HideInInspector] private bool done = false;
+        [HideInInspector] private Vector2 input = Vector2.zero;
 
         public bool Isfilled()
         {
-            RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
-            if (hit.collider != null && hit.collider.CompareTag("Progbar"))
-                return true;
-            return false;
+            return done;
         }
 
         public bool Startbar()
@@ -35,6 +34,33 @@ namespace FG
                 return true;
             }
             return false;
+        }
+
+        public void Interact(Vector2 input)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
+            if (hit.collider != null && hit.collider.CompareTag("Progbar"))
+                done = true;
+        }
+
+        public Vector2 Checkinput()
+        {
+            if (input == Vector2.zero)
+                Generateinput();
+            return input;
+        }
+
+        private void Generateinput()
+        {
+            int dir = Random.Range(0, 4);
+            if (dir == 0)
+                input.x = 1;
+            else if (dir == 1)
+                input.x = -1;
+            else if (dir == 2)
+                input.y = 1;
+            else if (dir == 3)
+                input.y = -1;
         }
 
         private IEnumerator Addprogress()
@@ -58,7 +84,7 @@ namespace FG
                         goright = true;
                 }
                 
-                if (Isfilled())
+                if (done)
                     break;
             }
         }

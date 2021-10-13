@@ -13,6 +13,7 @@ namespace FG
         [HideInInspector] private Transform progress;
         [HideInInspector] private Transform bar;
         [HideInInspector] private bool started = false;
+        [HideInInspector] private Vector2 input = Vector2.zero;
 
         public bool Isfilled()
         {
@@ -30,6 +31,31 @@ namespace FG
                 return true;
             }
             return false;
+        }
+
+        public void Interact()
+        {
+            return;
+        }
+
+        public Vector2 Checkinput()
+        {
+            if (input == Vector2.zero)
+                Generateinput();
+            return input;
+        }
+
+        private void Generateinput()
+        {
+            int dir = Random.Range(0, 4);
+            if (dir == 0)
+                input.x = 1;
+            else if (dir == 1)
+                input.x = -1;
+            else if (dir == 2)
+                input.y = 1;
+            else if (dir == 3)
+                input.y = -1;
         }
 
         private IEnumerator Addprogress()

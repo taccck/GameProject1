@@ -28,6 +28,7 @@ namespace FG
         [HideInInspector] private Coroutine cooldownroutine;
         [HideInInspector] private bool cd = false;
         [HideInInspector] private bool started = false;
+        [HideInInspector] private Vector2 input = Vector2.zero;
 
         public bool Isfilled()
         {
@@ -47,14 +48,34 @@ namespace FG
             return false;
         }
 
-        public void Clickme()
+        public void Interact()
         {
-            if (Isinzone() && !cd)
+            if (Isinzone() && !cd && !Isfilled())
             {
                 opsdone++;
                 cd = true;
                 cooldownroutine = StartCoroutine("Cooldown");
             }
+        }
+
+        public Vector2 Checkinput()
+        {
+            if (input == Vector2.zero)
+                Generateinput();
+            return input;
+        }
+
+        private void Generateinput()
+        {
+            int dir = Random.Range(0, 4);
+            if (dir == 0)
+                input.x = 1;
+            else if (dir == 1)
+                input.x = -1;
+            else if (dir == 2)
+                input.y = 1;
+            else if (dir == 3)
+                input.y = -1;
         }
 
         private IEnumerator Addprogress()
