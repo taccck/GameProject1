@@ -48,8 +48,8 @@ public class CookingManager : MonoBehaviour
 
         GameObject result = Instantiate(resultScreen);
         result.transform.position = (Vector2) Camera.main.transform.position;
-        print(recipe.sprite);
-        resultScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = recipe.sprite;
+        SpriteRenderer spRenderer = result.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        spRenderer.sprite = recipe.sprite;
         result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = $"Score: {score}";
     }
 }
