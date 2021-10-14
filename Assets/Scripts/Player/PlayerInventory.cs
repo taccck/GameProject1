@@ -14,10 +14,10 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private float dropSpeed;
     [SerializeField] private ItemIcon[] icons;
     [SerializeField] private Image outcome;
+    [SerializeField] private Text nothingText;
     [SerializeField] private RordonSpeech rordon;
 
     private LayerMask floorMask;
-    private SaveManager saveManager;
 
     private const float DROP_OFFSET = 1.5f;
 
@@ -82,6 +82,16 @@ public class PlayerInventory : MonoBehaviour
             icons[i].SetUI(inventory[i]);
         }
 
+        Recipes.Recipe r = Recipes.current.GetRecipe(inventory);
+        if (r.name == "WTF have you done!")
+        {
+            outcome.color = new Color(0, 0, 0, 0);
+            nothingText.enabled = true;
+            return;
+        }
+
+        nothingText.enabled = false;
+        outcome.color = new Color(1, 1, 1, 1);
         outcome.sprite = Recipes.current.GetRecipe(inventory).sprite;
     }
 
@@ -114,10 +124,5 @@ public class PlayerInventory : MonoBehaviour
     private void OnDrop5()
     {
         Drop(4);
-    }
-
-    private void Awake()
-    {
-        saveManager = GetComponent<SaveManager>();
     }
 }

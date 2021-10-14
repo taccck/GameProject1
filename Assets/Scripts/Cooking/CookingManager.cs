@@ -16,6 +16,7 @@ public class CookingManager : MonoBehaviour
         {
             recipe = Recipes.current.GetRecipe(other.GetComponent<PlayerInventory>().inventory);
             other.GetComponent<PlayerInput>().enabled = false;
+            Destroy(Camera.main.GetComponent<Followplayer>()); 
             Destroy(other.transform.GetChild(1).gameObject);
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(0).position = (Vector2) Camera.main.transform.position;
