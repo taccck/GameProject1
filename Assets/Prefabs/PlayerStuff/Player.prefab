@@ -27,14 +27,14 @@ RectTransform:
   m_GameObject: {fileID: 288126769505320450}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3.5912, y: 3.5912, z: 1.7956}
   m_Children: []
   m_Father: {fileID: 4482226063200389843}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -117.2, y: 112.9}
+  m_AnchoredPosition: {x: -434, y: 375}
   m_SizeDelta: {x: 99, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7067153331501528556
@@ -658,8 +658,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: 35c88f14dee438644b528751460cfd8e, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -670,7 +670,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: QUIT
 --- !u!1 &3174070584316582616
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,8 +862,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: 35c88f14dee438644b528751460cfd8e, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -874,7 +874,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Reset Level
+  m_Text: RESET LEVEL
 --- !u!1 &4488591592939605798
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +952,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4482226063200389843}
   m_Layer: 8
-  m_Name: Parent
+  m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   - {x: -0.3552946, y: 0.3188897, z: 0}
   m_ShapePathHash: 1657226783
   m_Mesh: {fileID: 0}
-  m_InstanceId: 117260
+  m_InstanceId: 168602
 --- !u!1 &5168482820757548397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,11 +1397,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
+    m_Font: {fileID: 12800000, guid: 35c88f14dee438644b528751460cfd8e, type: 3}
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 7
     m_MaxSize: 117
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1409,7 +1409,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pause Menu
+  m_Text: PAUSE MENU
 --- !u!1 &6363339259147328346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,10 +1483,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1525,12 +1525,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   betweenCharacters: 0.05
   lines:
-  - "My gran could do better! And she\u2019s dead!"
-  - For what we are about to eat, may the Lord make us truly not vomit.
-  - "You\u2019re getting your knickers in a twist! Calm down!"
-  - "This lamb is so undercooked, it\u2019s following Mary to school!"
-  - "There\u2019s enough garlic in here to kill every vampire in Europe."
-  - "This is a really tough decision\u2026\u2019cause you\u2019re both crap."
+  - "MY GRAN COULD DO BETTER! AND SHE\u2019S DEAD!"
+  - FOR WHAT WE ARE ABOUT TO EAT, MAY THE LORD MAKE US TRULY NOT VOMIT.
+  - "WHY DID THE CHICKEN CROSS THE ROAD? BECAUSE YOU DIDN\u2019T F\u2014ING COOK
+    IT!"
+  - "THIS LAMB IS SO UNDERCOOKED, IT\u2019S FOLLOWING MARY TO SCHOOL!"
+  - "THERE\u2019S ENOUGH GARLIC IN HERE TO KILL EVERY VAMPIRE IN EUROPE."
+  - "YOU PUT SO MUCH GINGER IN THIS, IT\u2019S A WEASLEY."
+  - "DON\u2019T JUST STAND THERE LIKE A BIG F\u2014ING MUFFIN!"
+  - "I WOULDN\u2019T TRUST YOU RUNNING A BATH LET ALONE A RESTAURANT."
+  - "THIS FISH IS SO RAW, HE\u2019S STILL FINDING NEMO."
+  - "YOU ADDED SO MUCH SALT AND PEPPER I CAN HEAR THE DISH SINGING \u2018PUSH IT.\u2019"
+  - HEY, PANINI HEAD, ARE YOU EVEN LISTENING TO ME?
+  - "I THINK I\u2019M A GREAT TEACHER."
+  - "I\u2019LL GET YOU MORE PUMPKIN, I\u2019LL RAM IT RIGHT UP YOUR A\u2014."
+  - "YOU USED SO MUCH OIL, THE U.S. WANT TO INVADE THE F\u2014ING PLATE."
+  - I SHOOT FROM THE HIP.
+  - I AM THE MOST UNSELFISH CHEF IN BRITAIN TODAY.
+  - "THIS CRAB IS SO UNDERCOOKED I CAN STILL HEAR IT SINGING \u2018UNDER THE SEA!"
+  - "THIS SOUFFL\xC9 HAS SUNK SO BADLY JAMES CAMERON WANTS TO MAKE A FILM ABOUT IT."
+  - "I\u2019VE NEVER, EVER, EVER, EVER, EVER MET SOMEONE I BELIEVE IN AS LITTLE AS
+    YOU."
+  - EVERYONE AGREES THAT I'M THE GREATEST CHEF ALIVE.
   text: {fileID: 4990516094225703034}
 --- !u!1 &6874631842174636850
 GameObject:
@@ -1686,8 +1702,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 48
+    m_Font: {fileID: 12800000, guid: 35c88f14dee438644b528751460cfd8e, type: 3}
+    m_FontSize: 31
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1698,7 +1714,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You can make:'
+  m_Text: 'YOU CAN MAKE:'
 --- !u!1 &7040109103501570233
 GameObject:
   m_ObjectHideFlags: 0
@@ -6706,14 +6722,14 @@ RectTransform:
   m_GameObject: {fileID: 7894440386171512635}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7956, y: 1.7956, z: 1.7956}
   m_Children: []
   m_Father: {fileID: 4482226063200389843}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -270.1, y: 125.1}
+  m_AnchoredPosition: {x: -714.9, y: 399.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5480284249289616952
@@ -7154,15 +7170,15 @@ RectTransform:
   m_GameObject: {fileID: 9108868949452789213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.17956, y: 0.17956, z: 1.7956}
   m_Children: []
   m_Father: {fileID: 4482226063200389843}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101.5, y: 111.7}
-  m_SizeDelta: {x: 160, y: 57.47}
+  m_AnchoredPosition: {x: -408.3, y: 373.79996}
+  m_SizeDelta: {x: 1554, y: 570}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4587879403568529623
 CanvasRenderer:
@@ -7193,21 +7209,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 35c88f14dee438644b528751460cfd8e, type: 3}
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 6
+    m_MaxSize: 300
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '
-
-'
+  m_Text: 
 --- !u!1 &9186647634155528505
 GameObject:
   m_ObjectHideFlags: 0
