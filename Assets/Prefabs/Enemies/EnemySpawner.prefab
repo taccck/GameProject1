@@ -47,3 +47,6 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 6460509709989736703, guid: ddf57b7a2fae103478e945da98631e35, type: 3}
   spawnDelay: 5
   spawnDistance: 1
+  blinkduration: 0.5
+  blinkdelay: 3
+  arrowprefab: {fileID: 3897074967398625736, guid: 340e6e1b793d1444ebbf093f4988ef20, type: 3}
