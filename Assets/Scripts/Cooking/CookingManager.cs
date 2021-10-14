@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class StartCooking : MonoBehaviour
+public class CookingManager : MonoBehaviour
 {
     [SerializeField] private GameObject resultScreen;
     private Recipes.Recipe recipe;
     private int currIndex;
+    [HideInInspector] public int successfulEvents;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -32,14 +34,17 @@ public class StartCooking : MonoBehaviour
 
         CookingController cntl = Instantiate(recipe.cookingSections[currIndex]).GetComponent<CookingController>();
         cntl.transform.position = (Vector2) Camera.main.transform.position;
-        cntl.startCooking = this;
+        cntl.cookingManager = this;
         currIndex++;
     }
 
     private void Result()
     {
+        int score = (int) ((successfulEvents / (float) recipe.cookingSections.Length) * recipe.ingredients.Length * 20);
+
         GameObject result = Instantiate(resultScreen);
         result.transform.position = (Vector2) Camera.main.transform.position;
         resultScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = recipe.sprite;
+        result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = $"Score: {score}";
     }
 }
