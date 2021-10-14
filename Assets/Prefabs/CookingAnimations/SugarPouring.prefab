@@ -286,7 +286,7 @@ SpriteRenderer:
   m_SortingLayerID: 190599323
   m_SortingLayer: 5
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: da99de688efa48e4d9f62174b23a7c09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91d5e57622d98624a87833f6b7e23f67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -453,9 +453,9 @@ MonoBehaviour:
   progCircle: {fileID: 4451154058218988094}
   progZone: {fileID: 0}
   progClick: {fileID: 0}
-  success: {fileID: 0}
-  fail: {fileID: 0}
-  toSwap: {fileID: 0}
+  success: {fileID: 21300000, guid: 12f5fdb8ac1a8b9429b97ce2653fa338, type: 3}
+  fail: {fileID: 21300000, guid: 2f57d3ad943deea42b845ff95a7ecaea, type: 3}
+  toSwap: {fileID: 4621900394705705154}
   toHide: {fileID: 4621900394059597456}
   toStop: {fileID: 4621900394059597457}
   timeBeforeEnd: 2

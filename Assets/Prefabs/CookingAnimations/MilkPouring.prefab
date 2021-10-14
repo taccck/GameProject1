@@ -452,7 +452,7 @@ MonoBehaviour:
   progClick: {fileID: 0}
   success: {fileID: 21300000, guid: 4ce30b0464ae81144a11e6afa8e78435, type: 3}
   fail: {fileID: 21300000, guid: 23b65c4b19d1d3e41a668b209202a203, type: 3}
-  toSwap: {fileID: 0}
+  toSwap: {fileID: 5010358954886863226}
   toHide: {fileID: 5010358954556023324}
   toStop: {fileID: 5010358954556023325}
   timeBeforeEnd: 2
