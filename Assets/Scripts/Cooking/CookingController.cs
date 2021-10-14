@@ -89,16 +89,13 @@ public class CookingController : MonoBehaviour
                 break;
             case EventType.Circle:
                 progCircle.Interact();
-                if (progCircle.Isfilled())
-                    StartCoroutine(End());
                 break;
             case EventType.Zone:
                 progZone.Interact();
                 break;
             case EventType.Click:
                 progClick.Interact();
-                if (progClick.Isfilled())
-                    StartCoroutine(End());
+                StartCoroutine(End());
                 break;
         }
     }
@@ -140,7 +137,7 @@ public class CookingController : MonoBehaviour
                 Outcome(progClick.Isfilled());
                 break;
         }
-        
+
         done = true;
         yield return new WaitForSeconds(timeBeforeEnd);
         cookingManager.Next();
