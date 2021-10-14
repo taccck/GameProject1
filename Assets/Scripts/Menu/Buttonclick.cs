@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FG
 {
@@ -8,12 +9,22 @@ namespace FG
     {
         public void Playclick()
         {
-            Debug.Log("herp");
+            SceneManager.LoadScene("Complete Level");
+        }
+
+        public void Creditclick()
+        {
+            Debug.Log("creds");
+        }
+
+        public void Backclick()
+        {
+            Debug.Log("creds");
         }
 
         public void Quitclick()
         {
-            Debug.Log("derp");
+            Application.Quit();
         }
     }
 }
