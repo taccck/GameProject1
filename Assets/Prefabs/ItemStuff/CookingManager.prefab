@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3879348980123424741}
   - component: {fileID: 3879348980123424740}
-  - component: {fileID: 3879348980123424738}
+  - component: {fileID: 8762869086836029517}
   m_Layer: 6
-  m_Name: StartCooking
+  m_Name: CookingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3879348980123424738
+--- !u!114 &8762869086836029517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

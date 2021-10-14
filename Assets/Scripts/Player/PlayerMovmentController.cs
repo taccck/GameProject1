@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,8 +5,6 @@ namespace FG
 {
     public class PlayerMovmentController : MonoBehaviour
     {
-        [NonSerialized] public bool bonking;
-        
         [SerializeField, Tooltip("m/s"), Header("Walking")]
         private float walkSpeed = 5f;
 
@@ -34,6 +31,8 @@ namespace FG
         private bool walking;
         private bool jumping;
         private bool dashing;
+        private bool bonking;
+        private bool lavaing;
 
         private const float SMALL_OFFSET = .1f;
 
@@ -57,8 +56,14 @@ namespace FG
 
         public void LavaKnockback()
         {
+            bonking = false;
+            dashing = false;
+            lavaing = true;
+            
             Vector2 knockbackDir = Vector2.up * lavaKnockbackSpeed;
             body.velocity = knockbackDir;
+            
+            AudioManager.Curr.Play("LavaScream");
         }
 
         private void OnMove(InputValue value)
@@ -110,6 +115,7 @@ namespace FG
 
             bonking = false;
             dashing = false;
+            lavaing = false;
         }
 
         private void Walk()
@@ -167,6 +173,8 @@ namespace FG
                 animController.ChangeAnimationState(animController.Bonk);
             else if (dashing)
                 animController.ChangeAnimationState(animController.Dash);
+            else if (lavaing)
+                animController.ChangeAnimationState(animController.Jump);
             else if (jumping)
                 animController.ChangeAnimationState(animController.Jump);
             else if (walking && onGround)

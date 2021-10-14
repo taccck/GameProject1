@@ -14,12 +14,12 @@ namespace FG
 
         public void Creditclick()
         {
-            Debug.Log("creds");
+            SceneManager.LoadScene("Credscene");
         }
 
         public void Backclick()
         {
-            Debug.Log("creds");
+            SceneManager.LoadScene("Mainmenu");
         }
 
         public void Quitclick()

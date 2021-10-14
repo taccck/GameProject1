@@ -67,12 +67,9 @@ namespace FG
         {
             if (!inventory.Drop()) Death();
             movementController.LavaKnockback();
-            movementController.bonking = false;
 
             if (noPickupRoutine != null) StopCoroutine(noPickupRoutine);
             noPickupRoutine = StartCoroutine(NoPickup());
-
-            AudioManager.Curr.Play("LavaScream");
         }
 
         public void Death()

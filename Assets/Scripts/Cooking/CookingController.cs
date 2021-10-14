@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CookingController : MonoBehaviour
 {
-    [HideInInspector] public StartCooking startCooking;
+    [HideInInspector] public CookingManager cookingManager;
 
     [Header("Event"), SerializeField] private float time;
     [SerializeField] private Progressbar progBar;
@@ -84,6 +84,8 @@ public class CookingController : MonoBehaviour
         {
             case EventType.Bar:
                 progBar.Interact();
+                if (progBar.Isfilled())
+                    StartCoroutine(End());
                 break;
             case EventType.Circle:
                 progCircle.Interact();
@@ -93,6 +95,7 @@ public class CookingController : MonoBehaviour
                 break;
             case EventType.Click:
                 progClick.Interact();
+                StartCoroutine(End());
                 break;
         }
     }
@@ -107,12 +110,18 @@ public class CookingController : MonoBehaviour
         if (fail == null || success == null) return;
 
         toSwap.sprite = outcome ? success : fail;
+        if (outcome) cookingManager.successfulEvents++;
     }
 
     private IEnumerator CookTime()
     {
         yield return new WaitForSeconds(time);
 
+        StartCoroutine(End());
+    }
+
+    private IEnumerator End()
+    {
         switch (eventType)
         {
             case EventType.Bar:
@@ -131,7 +140,7 @@ public class CookingController : MonoBehaviour
 
         done = true;
         yield return new WaitForSeconds(timeBeforeEnd);
-        startCooking.Next();
+        cookingManager.Next();
         Destroy(gameObject);
     }
 

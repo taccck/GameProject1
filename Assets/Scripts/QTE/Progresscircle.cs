@@ -102,16 +102,16 @@ namespace FG
 
         private void Addprogress()
         {
-            if (!Isfilled())
-            {
-                progress.localScale += new Vector3(percentage, percentage);
+            progress.localScale += new Vector3(percentage, percentage);
 
-                if (!swapped && progress.localScale.x > circle.localScale.x)
-                {
-                    circle.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                    swapped = true;
-                }
+            if (!swapped && progress.localScale.x > circle.localScale.x)
+            {
+                circle.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                swapped = true;
             }
+            
+            if (progress.localScale.x > circle.localScale.x)
+                progress.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         private void Awake()

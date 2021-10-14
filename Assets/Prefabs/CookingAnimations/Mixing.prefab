@@ -444,14 +444,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20855901f0935914bb3db3f880dfb938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartCooking: {fileID: 0}
+  cookingManager: {fileID: 0}
   time: 6
   progBar: {fileID: 0}
   progCircle: {fileID: 2279381224080967162}
   progZone: {fileID: 0}
   progClick: {fileID: 0}
   success: {fileID: 0}
-  fail: {fileID: 0}
+  fail: {fileID: -1714568570120577123, guid: d8b8890affc8bb340b5fb2aa6f6f6417, type: 3}
   toSwap: {fileID: 0}
   toHide: {fileID: 3859807010212084624}
   toStop: {fileID: 0}
