@@ -11,7 +11,8 @@ public class Menu : MonoBehaviour
     private void OnMenu()
     {
         active = !active;
-        inventory.SetActive(!active);
+        if (inventory != null)
+            inventory.SetActive(!active);
         menuToggle.SetActive(active);
         Time.timeScale = active ? 0f : 1f;
     }

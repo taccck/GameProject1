@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class CookingManager : MonoBehaviour
@@ -13,7 +14,8 @@ public class CookingManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             recipe = Recipes.current.GetRecipe(other.GetComponent<PlayerInventory>().inventory);
-            other.gameObject.SetActive(false);
+            other.GetComponent<PlayerInput>().enabled = false;
+            Destroy(other.transform.GetChild(1).gameObject);
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(0).position = (Vector2) Camera.main.transform.position;
 
