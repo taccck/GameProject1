@@ -59,10 +59,10 @@ namespace FG
             bonking = false;
             dashing = false;
             lavaing = true;
-            
+
             Vector2 knockbackDir = Vector2.up * lavaKnockbackSpeed;
             body.velocity = knockbackDir;
-            
+
             AudioManager.Curr.Play("LavaScream");
         }
 
@@ -98,11 +98,11 @@ namespace FG
 
         private void FixedUpdate()
         {
-                OnGround();
-                Walk();
-                Jump();
-                Dash();
-                Animate();
+            OnGround();
+            Walk();
+            Jump();
+            Dash();
+            Animate();
         }
 
         private void OnGround()
@@ -163,6 +163,7 @@ namespace FG
                 SMALL_OFFSET, floorMaks);
 
             if (!sideCheck) return;
+            print("bonk");
             dashing = false;
             Knockback(Mathf.Approximately(transform.localScale.x, 1f), true);
         }
