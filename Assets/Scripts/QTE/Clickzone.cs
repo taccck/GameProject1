@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FG
@@ -15,15 +14,16 @@ namespace FG
         [SerializeField] private float interval = 1f;
         [SerializeField] private float cooldown = 1f;
 
-        [HideInInspector] private Transform progress;
-        [HideInInspector] private Transform bar;
-        [HideInInspector] private Transform red;
-        [HideInInspector] private bool goright = true;
-        [HideInInspector] private bool started = false;
-        [HideInInspector] private bool done = false;
-        [HideInInspector] private Vector2 input = Vector2.zero;
-        [HideInInspector] private bool cd = false;
+        private Transform progress;
+        private Transform bar;
+        private Transform red;
+        private bool goright = true;
+        private bool started = false;
+        private bool done = false;
+        private Vector2 input = Vector2.zero;
+        private bool cd = false;
         private Coroutine progressRoutine;
+        private LayerMask minigameMask;
 
         public bool Isfilled()
         {
@@ -42,11 +42,11 @@ namespace FG
             return false;
         }
 
-        public void Interact(Vector2 input)
+        public void Interact()
         {
             if (!cd)
             {
-                RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f);
+                RaycastHit2D hit = Physics2D.Raycast(progress.position, Vector2.up, 1f, minigameMask);
                 if (hit.collider != null && hit.collider.CompareTag("Progbar"))
                 {
                     done = true;
@@ -127,6 +127,7 @@ namespace FG
             Redloc();
 
             goright = Random.Range(0, 1) > 0.5f;
+            minigameMask = LayerMask.GetMask("Progbar");
         }
     }
 }

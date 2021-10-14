@@ -44,6 +44,7 @@ public class SaveManager : MonoBehaviour
         transform.position = saveFile.playerPos;
         inventory.inventory = saveFile.items.ToArray();
         hotSauce.position = new Vector2(0, saveFile.lavaHeight);
+        inventory.UpdateUI();
     }
 
     private void Start()

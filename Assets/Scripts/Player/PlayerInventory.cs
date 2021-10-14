@@ -71,7 +71,7 @@ public class PlayerInventory : MonoBehaviour
         return true;
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         for (int i = 0; i < 5; i++)
         {

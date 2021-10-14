@@ -241,6 +241,9 @@ MonoBehaviour:
   padding: 1
   interval: 0.1
   cooldown: 0
+  minigameMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &6779813280309325247
 GameObject:
   m_ObjectHideFlags: 0
