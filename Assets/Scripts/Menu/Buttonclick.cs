@@ -9,7 +9,7 @@ namespace FG
     {
         public void Playclick()
         {
-            SceneManager.LoadScene("Complete Level");
+            SceneManager.LoadScene("FinalFinalCompleteScene");
         }
 
         public void Creditclick()
