@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private float dropSpeed;
     [SerializeField] private ItemIcon[] icons;
     [SerializeField] private Image outcome;
+    [SerializeField] private RordonSpeech rordon;
 
     private LayerMask floorMask;
     private SaveManager saveManager;
@@ -30,6 +31,7 @@ public class PlayerInventory : MonoBehaviour
 
             inventory[i] = itemToAdd;
             UpdateUI();
+            rordon.StartRordonLine();
             return true;
         }
 
