@@ -160,10 +160,11 @@ namespace FG
             RaycastHit2D sideCheck = Physics2D.BoxCast((Vector2) transform.position + playerCollider.offset,
                 playerCollider.size - new Vector2(SMALL_OFFSET, SMALL_OFFSET), 0,
                 Vector2.right * transform.localScale.x * -1f,
-                SMALL_OFFSET, floorMaks);
+                SMALL_OFFSET * 2, floorMaks);
+
+            print(Vector2.right * transform.localScale.x * -1f);
 
             if (!sideCheck) return;
-            print("bonk");
             dashing = false;
             Knockback(Mathf.Approximately(transform.localScale.x, 1f), true);
         }
