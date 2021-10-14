@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerInventory : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private float dropSpeed;
     [SerializeField] private ItemIcon[] icons;
+    [SerializeField] private Image outcome;
 
     private LayerMask floorMask;
     private SaveManager saveManager;
@@ -77,6 +79,8 @@ public class PlayerInventory : MonoBehaviour
         {
             icons[i].SetUI(inventory[i]);
         }
+
+        outcome.sprite = Recipes.current.GetRecipe(inventory).sprite;
     }
 
     private void Start()

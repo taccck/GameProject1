@@ -13,14 +13,14 @@ public class CookingManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             recipe = Recipes.current.GetRecipe(other.GetComponent<PlayerInventory>().inventory);
-            other.gameObject.SetActive(false); 
+            other.gameObject.SetActive(false);
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(0).position = (Vector2) Camera.main.transform.position;
 
             if (recipe.ingredients != null)
                 Next();
             else
-                Result();
+                Result(false);
         }
     }
 
@@ -28,7 +28,7 @@ public class CookingManager : MonoBehaviour
     {
         if (recipe.cookingSections.Length == currIndex)
         {
-            Result();
+            Result(true);
             return;
         }
 
@@ -38,12 +38,15 @@ public class CookingManager : MonoBehaviour
         currIndex++;
     }
 
-    private void Result()
+    private void Result(bool canCook)
     {
-        int score = (int) ((successfulEvents / (float) recipe.cookingSections.Length) * recipe.ingredients.Length * 20);
+        int score = 0;
+        if (canCook)
+            score = (int) ((successfulEvents / (float) recipe.cookingSections.Length) * recipe.ingredients.Length * 20);
 
         GameObject result = Instantiate(resultScreen);
         result.transform.position = (Vector2) Camera.main.transform.position;
+        print(recipe.sprite);
         resultScreen.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = recipe.sprite;
         result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = $"Score: {score}";
     }
