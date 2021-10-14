@@ -84,15 +84,21 @@ public class CookingController : MonoBehaviour
         {
             case EventType.Bar:
                 progBar.Interact();
+                if (progBar.Isfilled())
+                    StartCoroutine(End());
                 break;
             case EventType.Circle:
                 progCircle.Interact();
+                if (progCircle.Isfilled())
+                    StartCoroutine(End());
                 break;
             case EventType.Zone:
                 progZone.Interact();
                 break;
             case EventType.Click:
                 progClick.Interact();
+                if (progClick.Isfilled())
+                    StartCoroutine(End());
                 break;
         }
     }
@@ -114,6 +120,11 @@ public class CookingController : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
+        StartCoroutine(End());
+    }
+
+    private IEnumerator End()
+    {
         switch (eventType)
         {
             case EventType.Bar:
@@ -129,7 +140,7 @@ public class CookingController : MonoBehaviour
                 Outcome(progClick.Isfilled());
                 break;
         }
-
+        
         done = true;
         yield return new WaitForSeconds(timeBeforeEnd);
         cookingManager.Next();
