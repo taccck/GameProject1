@@ -1,1 +1,2 @@
-test.text
+Game project from the first-year students in game programming, game design and game artists studying at Future Games.
+The theme was "arcade", and we had two weeks to develop something from scratch. This is what we ended up with
