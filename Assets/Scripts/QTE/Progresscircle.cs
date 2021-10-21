@@ -4,56 +4,44 @@ using UnityEngine;
 
 namespace FG
 {
-    public class Progresscircle : MonoBehaviour
+    public class Progresscircle : QTE
     {
-        [Tooltip("% / interval")] [SerializeField]
-        private float percentage;
-
-        [SerializeField] private float interval = 1f;
-        [SerializeField] private float cooldown = 1f;
-
-        [HideInInspector] private Transform progress;
         [HideInInspector] private Transform circle;
         [HideInInspector] private bool swapped = false;
-        [HideInInspector] private bool started = false;
-        [HideInInspector] private Vector2 input = Vector2.zero;
-        [HideInInspector] private bool cd = false;
 
-        public bool Isfilled()
+        public override bool Isfilled()
         {
             if (progress.localScale.x / circle.localScale.x == 1)
                 return true;
             return false;
         }
 
-        public bool Startbar()
-        {
-            return true;
-        }
-
-        public void Interact()
+        public override void Interact()
         {
             if (!cd)
             {
-                Addprogress();
-                StartCoroutine("Cooldown");
+                progress.localScale += new Vector3(percentage, percentage);
+
+                if (!swapped && progress.localScale.x > circle.localScale.x)
+                {
+                    circle.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                    swapped = true;
+                }
+
+                if (progress.localScale.x > circle.localScale.x)
+                    progress.GetComponent<SpriteRenderer>().color = Color.red;
+
+                StartCoroutine(Cooldown());
             }
         }
 
-        public Vector2 Checkinput()
+        public override Vector2 Checkinput()
         {
             Generateinput();
             return input;
         }
 
-        private IEnumerator Cooldown()
-        {
-            cd = true;
-            yield return new WaitForSeconds(cooldown);
-            cd = false;
-        }
-
-        private void Generateinput()
+        protected override void Generateinput()
         {
             if (input == Vector2.zero)
             {
@@ -100,18 +88,14 @@ namespace FG
             }
         }
 
-        private void Addprogress()
+        protected override IEnumerator Addprogress()
         {
-            progress.localScale += new Vector3(percentage, percentage);
+            yield return new WaitForSeconds(interval);
+        }
 
-            if (!swapped && progress.localScale.x > circle.localScale.x)
-            {
-                circle.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                swapped = true;
-            }
-            
-            if (progress.localScale.x > circle.localScale.x)
-                progress.GetComponent<SpriteRenderer>().color = Color.red;
+        protected override void Redloc()
+        {
+            ;
         }
 
         private void Awake()

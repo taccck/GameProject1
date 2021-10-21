@@ -4,67 +4,43 @@ using UnityEngine;
 
 namespace FG
 {
-    public class Progressbar : MonoBehaviour
+    public class Progressbar : QTE
     {
-        [Tooltip("% / interval")] [SerializeField]
-        private float percentage;
-
-        [SerializeField] private float interval = 1f;
-
-        [HideInInspector] private Transform progress;
-        [HideInInspector] private Transform bar;
-        [HideInInspector] private bool started = false;
-        [HideInInspector] private Vector2 input = Vector2.zero;
-
-        public bool Isfilled()
+        public override bool Isfilled()
         {
             if (progress.localScale.x >= bar.localScale.x)
                 return true;
             return false;
         }
 
-        public bool Startbar()
+        public override void Interact()
         {
-            if (!started)
+            if(!cd)
             {
-                started = true;
-                return true;
+                progress.localScale += new Vector3(percentage, 0);
+                if (progress.localScale.x > 5) progress.localScale = new Vector2(5f, 1f);
+                progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f,
+                    progress.localPosition.y);
+
+                StartCoroutine(Cooldown());
             }
-
-            return false;
         }
 
-        public void Interact()
-        {
-            Addprogress();
-        }
-
-        public Vector2 Checkinput()
+        public override Vector2 Checkinput()
         {
             if (input == Vector2.zero)
                 Generateinput();
             return input;
         }
 
-        private void Generateinput()
+        protected override IEnumerator Addprogress()
         {
-            int dir = Random.Range(0, 4);
-            if (dir == 0)
-                input.x = 1;
-            else if (dir == 1)
-                input.x = -1;
-            else if (dir == 2)
-                input.y = 1;
-            else if (dir == 3)
-                input.y = -1;
+            yield return new WaitForSeconds(interval);
         }
 
-        private void Addprogress()
+        protected override void Redloc()
         {
-            progress.localScale += new Vector3(percentage, 0);
-            if (progress.localScale.x > 5) progress.localScale = new Vector2(5f, 1f);
-            progress.localPosition = new Vector3((-bar.localScale.x / 2f) + progress.localScale.x / 2f,
-                progress.localPosition.y);
+            ;
         }
 
         private void Awake()

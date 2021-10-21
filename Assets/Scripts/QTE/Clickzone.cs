@@ -3,46 +3,24 @@ using UnityEngine;
 
 namespace FG
 {
-    public class Clickzone : MonoBehaviour
+    public class Clickzone : QTE
     {
-        [Tooltip("% / interval")] [SerializeField]
-        private float percentage;
-
-        [Tooltip("Padding for red bar, in width/2")] [SerializeField]
-        private int padding = 1;
-
-        [SerializeField] private float interval = 1f;
-        [SerializeField] private float cooldown = 1f;
-
-        private Transform progress;
-        private Transform bar;
-        private Transform red;
         private bool goright = true;
-        private bool started = false;
-        private bool done = false;
-        private Vector2 input = Vector2.zero;
-        private bool cd = false;
         private Coroutine progressRoutine;
         private LayerMask minigameMask;
 
-        public bool Isfilled()
+        public override bool Isfilled()
         {
             return done;
         }
 
-        public bool Startbar()
+        public override bool Startbar()
         {
-            if (!started)
-            {
-                started = true;
-                progressRoutine = StartCoroutine("Addprogress");
-                return true;
-            }
-
-            return false;
+            StartCoroutine(Addprogress());
+            return base.Startbar();
         }
 
-        public void Interact()
+        public override void Interact()
         {
             if (!cd)
             {
@@ -52,38 +30,11 @@ namespace FG
                     done = true;
                     StopCoroutine(progressRoutine);
                 }
-                StartCoroutine("Cooldown");
+                StartCoroutine(Cooldown());
             }
         }
 
-        public Vector2 Checkinput()
-        {
-            if (input == Vector2.zero)
-                Generateinput();
-            return input;
-        }
-
-        private IEnumerator Cooldown()
-        {
-            cd = true;
-            yield return new WaitForSeconds(cooldown);
-            cd = false;
-        }
-
-        private void Generateinput()
-        {
-            int dir = Random.Range(0, 4);
-            if (dir == 0)
-                input.x = 1;
-            else if (dir == 1)
-                input.x = -1;
-            else if (dir == 2)
-                input.y = 1;
-            else if (dir == 3)
-                input.y = -1;
-        }
-
-        private IEnumerator Addprogress()
+        protected override IEnumerator Addprogress()
         {
             while (true)
             {
@@ -109,7 +60,7 @@ namespace FG
             }
         }
 
-        private void Redloc()
+        protected override void Redloc()
         {
             float width = red.localScale.x / 2f;
             float rand = Random.Range(padding * width - bar.localScale.x / 2f, bar.localScale.x / 2f - padding * width);
