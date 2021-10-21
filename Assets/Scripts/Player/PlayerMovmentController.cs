@@ -162,8 +162,6 @@ namespace FG
                 Vector2.right * transform.localScale.x * -1f,
                 SMALL_OFFSET * 2, floorMaks);
 
-            print(Vector2.right * transform.localScale.x * -1f);
-
             if (!sideCheck) return;
             dashing = false;
             Knockback(Mathf.Approximately(transform.localScale.x, 1f), true);
