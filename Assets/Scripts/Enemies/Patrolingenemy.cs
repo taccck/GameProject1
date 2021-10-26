@@ -16,13 +16,13 @@ namespace FG
         private void FixedUpdate()
         {
             if (direction < 0)
+            {
                 if (transform.position.x <= target)
                 {
                     direction = 1;
                     target = transform.position.x + patrolwidth;
                 }
-                else
-                    ;
+            }
             else
                 if (transform.position.x >= target)
             {

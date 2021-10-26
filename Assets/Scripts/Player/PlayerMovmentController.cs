@@ -39,7 +39,6 @@ namespace FG
         [SerializeField] private Platformpassing platformpassing;
 
         [HideInInspector] private float rayrange = 2f;
-        [HideInInspector] private bool paused = false;
 
         public void Knockback(bool right, bool up)
         {

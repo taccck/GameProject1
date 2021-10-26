@@ -96,32 +96,23 @@ namespace FG
         {
             if (collision.name == "Lava")
                 LavaCollision();
+
             else if (collision.CompareTag("Danger"))
-            {
                 DangerCollision(collision.transform.position);
-            }
+
             else if(collision.name == "Checkpoint Stage 4")
-            {
                 foreach (Transform spawner in Camera.main.transform)
-                {
                     spawner.GetComponent<EnemySpawner>().Startme();
-                }
-            }
+
             else if(collision.name == "Checkpoint Final")
-            {
                 foreach (Transform spawner in Camera.main.transform)
-                {
                     spawner.GetComponent<EnemySpawner>().Stopme();
-                }
-            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.collider.CompareTag("Danger"))
-            {
                 DangerCollision(collision.transform.position);
-            }
         }
 
         private void Awake()

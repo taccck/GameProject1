@@ -8,8 +8,6 @@ namespace FG
     {
         [Tooltip("% lost / operation")]
         [SerializeField] private float percentageloss = 0;
-        [Tooltip("Number of operations required")]
-        [SerializeField] private int operations = 1;
         [Tooltip("Gap between the bars")]
         [SerializeField] private float gap = 0.5f;
 
